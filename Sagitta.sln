@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sagitta", "Sagitta\Sagitta.csproj", "{DE9A3C19-2433-4F1B-A324-3338D5017B51}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DE9A3C19-2433-4F1B-A324-3338D5017B51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE9A3C19-2433-4F1B-A324-3338D5017B51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE9A3C19-2433-4F1B-A324-3338D5017B51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE9A3C19-2433-4F1B-A324-3338D5017B51}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {36894F6B-E652-4790-8FF0-40B1553556CD}
+	EndGlobalSection
+EndGlobal
