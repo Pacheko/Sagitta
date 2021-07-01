@@ -13,6 +13,7 @@ namespace Sagitta.Controllers
     {
         private static readonly string[] Summaries = new[]
         {
+            //teste
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
