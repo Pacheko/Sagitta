@@ -15,6 +15,7 @@ namespace CalendarioCovid.Negocios.Database
         public DbSet<Pessoa> Pessoas { get; set; }
         public DbSet<Calendario> CalendarioVacinacao { get; set; }
         public DbSet<PermissaoVacinacao> PermissaoVacinacao { get; set; }
+        public DbSet<Comorbidade> Comorbidades { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
