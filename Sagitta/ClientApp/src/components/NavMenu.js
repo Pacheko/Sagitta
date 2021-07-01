@@ -39,8 +39,7 @@ export class NavMenu extends Component {
                             <div className="col-12 col-md-10">
                                 <ul className="p-0">
                                     <li> <a className="nav-item toggleNav linkmenu" onClick={() => { window.location.href = "/" }}>HOME</a> </li>
-                                    <li> <a className="nav-item toggleNav linkmenu" onClick={() => { window.location.href = "/counter" }}>SISTEMA</a> </li>
-                                    <li> <a className="nav-item toggleNav linkmenu" onClick={() => { window.location.href = "/fetch-data" }}>CONTATO</a> </li>
+                                    <li> <a className="nav-item toggleNav linkmenu" onClick={() => { window.location.href = "/sistema" }}>SISTEMA</a> </li>
                                 </ul>
                             </div>
                         </div>

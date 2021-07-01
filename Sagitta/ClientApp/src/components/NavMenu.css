@@ -2,6 +2,10 @@
     background-color: #00709a !important;
 }
 
+.paTop {
+    padding-top:0px;
+}
+
 .areaForm {
     display: flex;
     justify-content: center;
@@ -70,6 +74,12 @@
 
 .row {
     JUSTIFY-CONTENT: center;
+}
+
+.botaoAlinhar {
+    margin-bottom: 5px;
+    justify-content: center;
+    margin-top: 10px;
 }
 
 .toggleNavButton {
@@ -223,5 +233,113 @@
 @media (min-width: 992px) {
     .col-md-10 {
         width: 100%;
+    }
+}
+
+
+
+/* ESTILO SISTEMA */
+
+
+.table {
+    background-color: azure !important;
+}
+
+.hexagon-item {
+    height: 216.20508px !important;
+}
+
+.glyphicon {
+    font-size: 40px;
+}
+
+.panel-opcao {
+    padding: 10px;
+}
+
+@media (max-width: 767px) {
+    .panel-opcao {
+        margin-top: 10px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .col-lg-offset-1 {
+        margin-left: 10.333333%;
+    }
+}
+
+.areaflex {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.areatotal {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.area1 {
+    width: 222px;
+    height: 115px;
+    background: linear-gradient(180deg, #3da4cc, #012f56);
+    text-align: center;
+    font-size: 14PX;
+    font-weight: bold;
+    color: #00ffff;
+    font-family: arial;
+    border-radius: 2px;
+    box-shadow: 0px 0px 7px #ffffff;
+    cursor: pointer;
+}
+
+    .area1:hover {
+        background: linear-gradient(100deg, #4fceff, #02729c);
+        color: #00ffff;
+    }
+
+        .area1:hover .icone {
+            color: #00ffff;
+            animation-name: rotacao3d;
+            animation-duration: 2s;
+            animation-delay: 0s;
+            animation-iteration-count: infinite;
+            animation-fill-mode: both;
+        }
+
+.icone {
+    width: 75px;
+    height: 75px;
+    color: white;
+    padding: 18px;
+}
+
+.linkAcesso {
+    text-decoration: none;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+    .linkAcesso:hover {
+        text-decoration: none;
+    }
+
+.cards {
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+@keyframes rotacao3d {
+    0% {
+        transform: rotate3d(0, 1, 0, 0deg);
+    }
+
+    100% {
+        transform: rotate3d(0, 1, 0, 360deg);
     }
 }

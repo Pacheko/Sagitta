@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-export class FetchData extends Component {
-    static displayName = FetchData.name;
+export class PessoasCadastradas extends Component {
+    static displayName = PessoasCadastradas.name;
 
     constructor(props) {
         super(props);
@@ -17,15 +17,15 @@ export class FetchData extends Component {
             <table className='table table-striped' aria-labelledby="tabelLabel">
                 <thead>
                     <tr>
-                        <th>Date</th>
-                        <th>Temp. (C)</th>
-                        <th>Temp. (F)</th>
-                        <th>Summary</th>
+                        <th>Nome</th>
+                        <th>Cpf</th>
+                        <th>Idade</th>
+                        <th>Sexo</th>
                     </tr>
                 </thead>
                 <tbody>
                     {pessoas.map(p =>
-                        <tr>
+                        <tr key={p.id}>
                             <td>{p.nome}</td>
                             <td>{p.cpf}</td>
                             <td>{p.idade}</td>
@@ -39,13 +39,13 @@ export class FetchData extends Component {
 
     render() {
         let contents = this.state.loading
-            ? <p><em>Loading...</em></p>
-            : FetchData.renderForecastsTable(this.state.pessoas);
+            ? <p><em>Carregando...</em></p>
+            : PessoasCadastradas.renderForecastsTable(this.state.pessoas);
 
         return (
             <div>
-                <h1 id="tabelLabel" >Weather forecast</h1>
-                <p>This component demonstrates fetching data from the server.</p>
+                <h1 id="tabelLabel" style={{ color: "white", marginTop: "10px" }}>Pessoas Cadastradas</h1>
+                <p style={{ color: "white" }}>Pessoas que se cadastraram diretamente no site.</p>
                 {contents}
             </div>
         );
