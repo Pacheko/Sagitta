@@ -31,13 +31,13 @@ namespace CalendarioCovid.Negocios.Managers
                 Idade = idade,
                 Sexo = sexo,
                 Fone = fone,
-                Telegram = telegram,
+                //Telegram = telegram,
                 Email = email,
                 DataNascimento = dataNascimento,
                 Cidade = cidade,
                 Estado = estado,
-                TemComorbidade = temComorbidade,
-                Comorbidade = comorbidade
+                //TemComorbidade = temComorbidade,
+               // Comorbidade = comorbidade
             };
 
 

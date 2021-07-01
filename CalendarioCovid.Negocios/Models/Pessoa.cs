@@ -14,62 +14,47 @@ namespace CalendarioCovid.Negocios.Models
         public int Idade { get; set; }
         public string Sexo { get; set; }
         public string Fone { get; set; }
-        public string Telegram { get; set; }
+        //public string Telegram { get; set; }
         public string Email { get; set; }
         public string DataNascimento { get; set; }
         public string Cidade { get; set; }
         public string Estado { get; set; }
-        public bool TemComorbidade { get; set; }
-        public string Comorbidade { get; set; }
-        public int UsuarioId { get; set; }
+        //public bool TemComorbidade { get; set; }
+        //public string Comorbidade { get; set; }
+        //public int UsuarioId { get; set; }
         //public Administrador Usuario { get; set; }
         public List<PermissaoVacinacao> PermissaoVacinacao { get; set; }
 
         public Pessoa() { }
-
-        public Pessoa(string nome, string cPF, int idade, string sexo, string fone, string telegram, string email, string dataNascimento, string cidade, string estado, bool temComorbidade, string comorbidade)
-        {
-            Nome = nome;
-            CPF = cPF;
-            Idade = idade;
-            Sexo = sexo;
-            Fone = fone;
-            Telegram = telegram;
-            Email = email;
-            DataNascimento = dataNascimento;
-            Cidade = cidade;
-            Estado = estado;
-            TemComorbidade = temComorbidade;
-            Comorbidade = comorbidade;
-        }
 
         public string GetInfo()
         {
             return $"Nome: {Nome} CPF: {CPF} Idade: {Idade}";
         }
 
-        public bool PodeVacinar()
-        {
-            using (var database = new AppDbContext())
-            {
-                var calendario = database.CalendarioVacinacao.FirstOrDefault(x => x.ExigenciaComorbidade == TemComorbidade && x.IdadeMinima < Idade && x.DataInicial <= DateTime.Now);
+        //public bool PodeVacinar()
+        //{
+        //    using (var database = new AppDbContext())
+        //    {
+        //        var calendario = database.CalendarioVacinacao.FirstOrDefault(x => x.ExigenciaComorbidade == TemComorbidade && x.IdadeMinima < Idade && x.DataInicial <= DateTime.Now);
 
-                if (calendario != null)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
+        //        if (calendario != null)
+        //        {
+        //            return true;
+        //        }
+        //        else
+        //        {
+        //            return false;
+        //        }
+        //    }
+        //}
 
         public bool PodeVacinar(out string retorno)
         {
             using (var database = new AppDbContext())
             {
-                var calendario = database.CalendarioVacinacao.FirstOrDefault(x => x.ExigenciaComorbidade == TemComorbidade && x.IdadeMinima < Idade && x.DataInicial <= DateTime.Now);
+                //var calendario = database.CalendarioVacinacao.FirstOrDefault(x => x.ExigenciaComorbidade == TemComorbidade && x.IdadeMinima < Idade && x.DataInicial <= DateTime.Now);
+                var calendario = database.CalendarioVacinacao.FirstOrDefault(x => x.IdadeMinima < Idade && x.DataInicial <= DateTime.Now);
 
                 if (calendario != null)
                 {
@@ -96,7 +81,8 @@ namespace CalendarioCovid.Negocios.Models
                     return false;
                 }
 
-                var calendario = database.CalendarioVacinacao.FirstOrDefault(x => x.ExigenciaComorbidade == pessoa.TemComorbidade && x.IdadeMinima < pessoa.Idade && x.DataInicial <= DateTime.Now);
+                //var calendario = database.CalendarioVacinacao.FirstOrDefault(x => x.ExigenciaComorbidade == pessoa.TemComorbidade && x.IdadeMinima < pessoa.Idade && x.DataInicial <= DateTime.Now);
+                var calendario = database.CalendarioVacinacao.FirstOrDefault(x => x.IdadeMinima < pessoa.Idade && x.DataInicial <= DateTime.Now);
 
                 if (calendario != null)
                 {

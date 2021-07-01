@@ -61,6 +61,24 @@ namespace CalendarioCovid.Negocios.Migrations
                     b.ToTable("CalendarioVacinacao");
                 });
 
+            modelBuilder.Entity("CalendarioCovid.Negocios.Models.Comorbidade", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Descricao")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsComorbidade")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Comorbidades");
+                });
+
             modelBuilder.Entity("CalendarioCovid.Negocios.Models.PermissaoVacinacao", b =>
                 {
                     b.Property<int>("Id")
@@ -96,9 +114,6 @@ namespace CalendarioCovid.Negocios.Migrations
                     b.Property<string>("Cidade")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Comorbidade")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("DataNascimento")
                         .HasColumnType("nvarchar(max)");
 
@@ -120,18 +135,31 @@ namespace CalendarioCovid.Negocios.Migrations
                     b.Property<string>("Sexo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Telegram")
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("Id");
 
-                    b.Property<bool>("TemComorbidade")
-                        .HasColumnType("bit");
+                    b.ToTable("Pessoas");
+                });
 
-                    b.Property<int>("UsuarioId")
+            modelBuilder.Entity("CalendarioCovid.Negocios.Models.PessoaComorbidade", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ComorbidadeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PessoaId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Pessoas");
+                    b.HasIndex("ComorbidadeId");
+
+                    b.HasIndex("PessoaId");
+
+                    b.ToTable("PessoaComorbidades");
                 });
 
             modelBuilder.Entity("CalendarioCovid.Negocios.Models.PermissaoVacinacao", b =>
@@ -149,6 +177,25 @@ namespace CalendarioCovid.Negocios.Migrations
                         .IsRequired();
 
                     b.Navigation("Calendario");
+
+                    b.Navigation("Pessoa");
+                });
+
+            modelBuilder.Entity("CalendarioCovid.Negocios.Models.PessoaComorbidade", b =>
+                {
+                    b.HasOne("CalendarioCovid.Negocios.Models.Comorbidade", "Comorbidade")
+                        .WithMany()
+                        .HasForeignKey("ComorbidadeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CalendarioCovid.Negocios.Models.Pessoa", "Pessoa")
+                        .WithMany()
+                        .HasForeignKey("PessoaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Comorbidade");
 
                     b.Navigation("Pessoa");
                 });

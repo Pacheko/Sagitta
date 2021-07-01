@@ -10,17 +10,17 @@ namespace TesteApp
     {
         static void Main(string[] args)
         {
-            //AdicionaEventosVacinacao();
-            //AdicionaPessoas();
+           // AdicionaEventosVacinacao();
+           // AdicionaPessoas();
 
             using var db = new AppDbContext();
 
-            Console.WriteLine("Calendário de Vacinação:\n");
+            //Console.WriteLine("Calendário de Vacinação:\n");
 
-            foreach (var item in db.CalendarioVacinacao.OrderBy(x => x.DataInicial).ToList())
-            {
-                Console.WriteLine(item.GetInfo());
-            }
+            //foreach (var item in db.CalendarioVacinacao.OrderBy(x => x.DataInicial).ToList())
+            //{
+            //    Console.WriteLine(item.GetInfo());
+            //}
 
             Console.WriteLine("\nPessoas Cadastradas, verificação:");
 

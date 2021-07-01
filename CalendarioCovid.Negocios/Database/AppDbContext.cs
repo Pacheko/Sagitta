@@ -13,6 +13,7 @@ namespace CalendarioCovid.Negocios.Database
 
         public DbSet<Administrador> Administradores { get; set; }
         public DbSet<Pessoa> Pessoas { get; set; }
+        public DbSet<PessoaComorbidade> PessoaComorbidades { get; set; }
         public DbSet<Calendario> CalendarioVacinacao { get; set; }
         public DbSet<PermissaoVacinacao> PermissaoVacinacao { get; set; }
         public DbSet<Comorbidade> Comorbidades { get; set; }
@@ -25,7 +26,7 @@ namespace CalendarioCovid.Negocios.Database
                 optionsBuilder
                     //.UseLoggerFactory(logger)
                    //.EnableSensitiveDataLogging()
-                    .UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=[AbsoluteFolderPath]\\Database\\DbSagitta.MDF;UID=sagitta;PASSWORD='12345';Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+                    .UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=[AbsoluteFolderPath]\\Database\\DbSagitta.MDF;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             }
 
         }
@@ -46,6 +47,13 @@ namespace CalendarioCovid.Negocios.Database
 
             modelBuilder.Entity<PermissaoVacinacao>()
                 .HasOne(a => a.Calendario);
+
+            modelBuilder.Entity<PessoaComorbidade>()
+                .HasOne(a => a.Pessoa);
+
+            modelBuilder.Entity<PessoaComorbidade>()
+                .HasOne(a => a.Comorbidade);
+
 
         }
     }
