@@ -9,10 +9,10 @@ export class PessoasCadastradas extends Component {
     }
 
     componentDidMount() {
-        this.populateWeatherData();
+        this.popularPessoas();
     }
 
-    static renderForecastsTable(pessoas) {
+    static renderPessoasTable(pessoas) {
         return (
             <table className='table table-striped' aria-labelledby="tabelLabel">
                 <thead>
@@ -40,7 +40,7 @@ export class PessoasCadastradas extends Component {
     render() {
         let contents = this.state.loading
             ? <p><em>Carregando...</em></p>
-            : PessoasCadastradas.renderForecastsTable(this.state.pessoas);
+            : PessoasCadastradas.renderPessoasTable(this.state.pessoas);
 
         return (
             <div>
@@ -51,9 +51,8 @@ export class PessoasCadastradas extends Component {
         );
     }
 
-    async populateWeatherData() {
-        //const response = await fetch('weatherforecast');
-        const response = await fetch('pessoa');
+    async popularPessoas() {
+        const response = await fetch('pessoa/sdfzd');
         const data = await response.json();
         this.setState({ pessoas: data, loading: false });
     }

@@ -1,29 +1,54 @@
 ﻿import React, { Component } from 'react';
 
-
 export class Cadastro extends Component {
     static displayName = Cadastro.name;
 
     constructor(props) {
         super(props);
-        this.state = { value: "" };
+        this.state = { value: "", nome:"", pessoa: "" };
 
-        this.handleChange = this.handleChange.bind(this);
+        this.handleChange = this.HandleChange.bind(this);
+        this.handleChange1 = this.handleChange1.bind(this);
     }
 
-    handleChange2(event) {
+    HandleChange(event) {
         this.setState({ value: event.target.value.replace(/[^\d]/g, "") });
     }
 
-    handleChange(event) {
-        this.setState({ value: event.target.value.replace(/[^\d]/g, "") });
+    handleChange1(event) {
+        this.setState({ nome: event.target.value });
     }
+
+    //componentDidMount() {
+    //    // Simple POST request with a JSON body using fetch
+    //    const requestOptions = {
+    //        method: 'POST',
+    //        headers: { 'Content-Type': 'application/json' },
+    //        body: JSON.stringify({ title: 'React POST Request Example' })
+    //    };
+    //    fetch('pessoa', requestOptions)
+    //        .then(response => response.json())
+    //        .then(data => this.setState({ postId: data.id }));
+    //}
+
+    handleOnSubmit(event) {
+        alert('Um nome foi enviado: ' + this.state.nome);
+        event.preventDefault();
+  
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ title: 'React POST Request Example' })
+        };
+
+        fetch('pessoa', requestOptions);
+    };
 
     render() {
         return (
             <div>
                 <h3 className="espaco texto">PREENCHA COM SEUS DADOS</h3>
-                <form id="form1" className="areaForm areaform2">
+                <form id="form1" className="areaForm areaform2" onSubmit={this.handleOnSubmit}>
 
 
                     <div className="areaCadastro">
@@ -31,7 +56,7 @@ export class Cadastro extends Component {
                         <div className="form-group">
                             <div className="form-group col-md-6">
                                 <label for="nome">NOME</label>
-                                <input type="text" className="form-control" id="nome" placeholder="Nome" autoComplete="off" />
+                                <input type="text" value={this.state.nome} onChange={this.handleChange1} className="form-control" id="nome" placeholder="Nome" autoComplete="off" />
                             </div>
                             <div className="form-group col-md-6">
                                 <label for="cpf">CPF</label>
@@ -41,7 +66,7 @@ export class Cadastro extends Component {
                         <div className="form-group">
                             <div className="form-group col-md-6">
                                 <label for="idade">IDADE</label>
-                                <input type="text" className="form-control" value={this.state.value} maxLength="3" onChange={this.handleChange} id="idade" placeholder="Idade" autoComplete="off" />
+                                <input type="text" className="form-control" value={this.state.value} maxLength="3" onChange={this.HandleChange} id="idade" placeholder="Idade" autoComplete="off" />
                             </div>
                             <div className="form-group col-md-6">
                                 <label for="sexo">SEXO</label>
@@ -92,7 +117,7 @@ export class Cadastro extends Component {
                                 </select>
                             </div>
                             <div className="form-group col-md-12 botaoAlinhar" align="center">
-                                <button id="botaoSalvar" className="btn btn-light botao">SALVAR</button>
+                                <button id="botaoSalvar" type="submit" className="btn btn-light botao">SALVAR</button>
                             </div>
 
                         </div>
