@@ -1,5 +1,6 @@
 ﻿using CalendarioCovid.Negocios.Database;
 using CalendarioCovid.Negocios.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -13,32 +14,39 @@ namespace Sagitta.Controllers
     [Route("[controller]")]
     public class PessoaController : ControllerBase
     {
+        private readonly AppDbContext _context;
+
         [HttpGet]
-        public IEnumerable<Pessoa> Get()
+        public IEnumerable<Pessoa> GetTodasPessoas()
         {
             using var db = new AppDbContext();
 
             return db.Pessoas.Where(x => x.Id > 0)
                  .ToList();
+        }
+
+        [HttpGet("{vacinadas}")]
+        public IEnumerable<Pessoa> GetPessoasVacinadas(string vacinadas)
+        {
+            using var db = new AppDbContext();
+
+            return db.Pessoas.Where(x => x.Id == 1).ToList();
+        }
 
 
-            //var consulta = db.Pessoas
-            //    .Where(x => x.Id > 0)
-            //    .ToList();
-
-            //foreach (var item in consulta)
+        [HttpPost("{nome}")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //public async Task<IActionResult> SalvarPessoa([FromBody] string nome, string idade)
+        public void SalvarPessoa([FromBody] string nome)
+        {
+            //if (!ModelState.IsValid)
             //{
-            //    item.PodeVacinar(out string retorno);
-            //    Console.WriteLine($"{item.GetInfo()} {retorno}");
+            //    return BadRequest(ModelState);
             //}
-
-            //return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            //{
-            //    Date = DateTime.Now.AddDays(index),
-            //    TemperatureC = rng.Next(-20, 55),
-            //    Summary = Summaries[rng.Next(Summaries.Length)]
-            //})
-            //.ToArray();
+            ////_context.Pessoas.Add(pessoa);
+            //await _context.SaveChangesAsync();
+            //  return CreatedAtAction("salvarpessoa");
         }
     }
 }
