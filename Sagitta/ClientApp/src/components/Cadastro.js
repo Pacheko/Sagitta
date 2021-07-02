@@ -55,7 +55,7 @@ export class Cadastro extends Component {
                         <div className="form-group">
                             <div className="form-group col-md-6">
                                 <label for="telefone">Telefone</label>
-                                <input type="text" className="form-control" id="telefone" maxLength="9" placeholder="Telefone" autoComplete="off" />
+                                <input type="text" className="form-control" id="telefone" maxLength="11" placeholder="Telefone" autoComplete="off" />
                             </div>
                             <div className="form-group col-md-6">
                                 <label for="email">EMAIL</label>
