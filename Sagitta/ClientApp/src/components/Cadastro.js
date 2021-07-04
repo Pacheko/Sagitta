@@ -1,5 +1,22 @@
-﻿import React, { Component } from 'react';
+﻿import { post } from 'jquery';
+import React, { Component } from 'react';
 
+export class Pessoa {
+    constructor() {
+        this.id = 0;
+        this.nome = "";
+        this.cpf = "";
+        this.idade = "";
+        this.sexo = "";
+        this.telefone = "";
+        this.email = "";
+        this.dataNasc = "";
+        this.cep = "";
+        this.cidade = "";
+        this.estado = "";
+        this.temComorbidade = "";
+    }
+}
 
 export class Cadastro extends Component {
     static displayName = Cadastro.name;
@@ -7,17 +24,8 @@ export class Cadastro extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            nome: null,
-            cpf: null,
-            idade: null,
-            sexo: null,
-            telefone: null,
-            email: null,
-            dataNasc: null,
-            cep: null,
-            cidade: null,
-            estado: null,
-            temComorbidade: null        
+            title: "",
+            pessoa: new Pessoa()
         }
     }
 
@@ -27,33 +35,24 @@ export class Cadastro extends Component {
         })
     }
 
-    onSubmit(e) {
-        e.preventDefault();
-        let nome = this.state.nome;
-        let cpf = this.state.cpf;
-        let idade = this.state.idade;
-        let sexo = this.state.sexo;
-        let telefone = this.state.telefone;
-        let email = this.state.email;
-        let dataNasc = this.state.dataNasc;
-        let cep = this.state.cep;
-        let cidade = this.state.cidade;
-        let estado = this.state.estado;
-        let temComorbidade = this.state.temComorbidade;
+    handleSalvar(event) {
+        event.preventDefault();
 
-        alert('DADOS: ' + nome + cpf + idade + sexo + telefone + email + dataNasc + cep + cidade + estado + temComorbidade);
-   
+        const data = new FormData(event.target);
+
+       
+        const response2 = fetch('/Pessoa/', { method: 'POST', body: data });
+/*        this.props.history.push('/fetch-pessoa');*/
     }
+
+   
 
     render() {
         return (
             <div>
                 <h3 className="espaco texto">PREENCHA COM SEUS DADOS</h3>
-                <form className="areaForm areaform2" onSubmit={this.onSubmit.bind(this)}>
-
-                    
+                <form className="areaForm areaform2" onSubmit={this.handleSalvar.bind(this)}>
                     <div className="areaCadastro">
-                          
                         <div className="form-group">
                             <div className="form-group col-md-6">
                                 <label for="nome">NOME</label>

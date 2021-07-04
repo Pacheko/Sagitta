@@ -14,16 +14,14 @@ namespace CalendarioCovid.Negocios.Models
         public int Idade { get; set; }
         public string Sexo { get; set; }
         public string Fone { get; set; }
-        //public string Telegram { get; set; }
+        public string Telegram { get; set; }
         public string Email { get; set; }
         public string DataNascimento { get; set; }
-        public string Cidade { get; set; }
-        public string Estado { get; set; }
-        //public bool TemComorbidade { get; set; }
-        //public string Comorbidade { get; set; }
-        //public int UsuarioId { get; set; }
-        //public Administrador Usuario { get; set; }
-        public List<PermissaoVacinacao> PermissaoVacinacao { get; set; }
+        public int CidadeId { get; set; }
+        public Cidade Cidade { get; set; }
+        public int? PrioridadeId { get; set; }
+        public Prioridade? Prioridade { get; set; }
+        public bool IsNotificado { get; set; }
 
         public Pessoa() { }
 
@@ -58,7 +56,7 @@ namespace CalendarioCovid.Negocios.Models
 
                 if (calendario != null)
                 {
-                    retorno = $"Pode se vacinar pela campanha: {calendario.Evento} data de inicio: {calendario.DataInicial.ToShortDateString()}";
+                    retorno = $"Pode se vacinar pela campanha:  data de inicio: {calendario.DataInicial.ToShortDateString()}";
                     return true;
                 }
                 else
@@ -86,7 +84,7 @@ namespace CalendarioCovid.Negocios.Models
 
                 if (calendario != null)
                 {
-                    retorno = $"{pessoa.Nome} pode se vacinar pela campanha: {calendario.Evento} data de inicio: {calendario.DataInicial.ToShortDateString()}";
+                    retorno = $"{pessoa.Nome} pode se vacinar pela campanha:  data de inicio: {calendario.DataInicial.ToShortDateString()}";
                     return true;
                 }
                 else

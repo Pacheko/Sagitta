@@ -14,9 +14,7 @@ namespace CalendarioCovid.Negocios.Database.Configuration
             //builder.ToTable("cad_empresa");
             builder.HasKey(tb => tb.Id);
 
-
-            
-
+            builder.Property(tb => tb.IsNotificado).HasDefaultValueSql("0").ValueGeneratedOnAdd();
         }
     }
 }

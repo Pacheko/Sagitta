@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+﻿import React, { Component } from 'react';
 
-export class PessoasCadastradas extends Component {
-    static displayName = PessoasCadastradas.name;
+export class PessoasAptasVacinar extends Component {
+    static displayName = PessoasAptasVacinar.name;
 
     constructor(props) {
         super(props);
@@ -12,7 +12,7 @@ export class PessoasCadastradas extends Component {
         this.popularPessoas();
     }
 
-    static renderPessoasTable(pessoas) {
+    static renderPT(pessoas) {
         return (
             <table className='table table-striped' aria-labelledby="tabelLabel">
                 <thead>
@@ -56,12 +56,12 @@ export class PessoasCadastradas extends Component {
     render() {
         let contents = this.state.loading
             ? <p><em>Carregando...</em></p>
-            : PessoasCadastradas.renderPessoasTable(this.state.pessoas);
+            : PessoasAptasVacinar.renderPT(this.state.pessoas);
 
         return (
             <div>
-                <h1 id="tabelLabel" style={{ color: "white", marginTop: "10px" }}>Pessoas Cadastradas</h1>
-                <p style={{ color: "white" }}>Pessoas que se cadastraram diretamente no site.</p>
+                <h1 id="tabelLabel" style={{ color: "white", marginTop: "10px" }}>Pessoas que já podem se vacinar</h1>
+                <p style={{ color: "white" }}>Pessoas aptas a tomar a vacina.</p>
                 {contents}
             </div>
         );

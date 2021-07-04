@@ -4,14 +4,16 @@ using CalendarioCovid.Negocios.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CalendarioCovid.Negocios.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210704003159_CorrecoesProfessor")]
+    partial class CorrecoesProfessor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -122,7 +124,7 @@ namespace CalendarioCovid.Negocios.Migrations
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PrioridadeId")
+                    b.Property<int>("PrioridadeId")
                         .HasColumnType("int");
 
                     b.Property<string>("Sexo")
@@ -241,7 +243,9 @@ namespace CalendarioCovid.Negocios.Migrations
 
                     b.HasOne("CalendarioCovid.Negocios.Models.Prioridade", "Prioridade")
                         .WithMany()
-                        .HasForeignKey("PrioridadeId");
+                        .HasForeignKey("PrioridadeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Cidade");
 
