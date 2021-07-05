@@ -3,8 +3,15 @@ import React, { Component } from 'react';
 export class Sistema extends Component {
 	static displayName = Sistema.name;
 
+	validar() {
+		if (sessionStorage.getItem("login") !== "true") {
+			window.location.href = "/loginMedicenter";
+		}
+	}
+
     render() {
-        return (
+		return (
+			<div onLoad={this.validar()}>
 			<div className="areaflex">
 				<div className="areatotal">
 
@@ -14,7 +21,7 @@ export class Sistema extends Component {
 								<div className="">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-people-fill icone" viewBox="0 0 16 16">
 										<path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-										<path fill-Rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z" />
+										<path fillRule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z" />
 										<path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
 									</svg>
 								</div>
@@ -26,14 +33,13 @@ export class Sistema extends Component {
 					<div id="divpessoasaptas" className="cards" >
 						<a onClick={() => { window.location.href = "/pessoasaptasvacinar" }} className="linkAcesso">
 							<div className="area1">
-								<div className="">
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-people-fill icone" viewBox="0 0 16 16">
-										<path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-										<path fill-Rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z" />
-										<path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+									<div className="">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-person-check icone" viewBox="0 0 16 16">
+										<path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+										<path fillRule="evenodd" d="M15.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L12.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
 									</svg>
 								</div>
-								<div className="">PESSOAS APTAS A TOMAR A VACINA</div>
+								<div className="">APTOS A TOMAR A VACINA</div>
 							</div>
 						</a>
 					</div>
@@ -41,14 +47,13 @@ export class Sistema extends Component {
 					<div id="divpessoasnaoaptas" className="cards" >
 						<a onClick={() => { window.location.href = "/pessoascadastradas" }} className="linkAcesso">
 							<div className="area1">
-								<div className="">
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-people-fill icone" viewBox="0 0 16 16">
-										<path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-										<path fill-Rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z" />
-										<path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+									<div className="">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-person-x icone" viewBox="0 0 16 16">
+										<path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+										<path fillRule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z" />
 									</svg>
 								</div>
-								<div className="">PESSOAS QUE AINDA NÃO PODEM TOMAR A VACINA</div>
+								<div className="">N&Atilde;O APTOS A TOMAR A VACINA</div>
 							</div>
 						</a>
 					</div>
@@ -56,11 +61,9 @@ export class Sistema extends Component {
 					<div id="divtiposvacina" className="cards" >
 						<a onClick={() => { window.location.href = "/vacinascadastradas" }} className="linkAcesso">
 							<div className="area1">
-								<div className="">
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-people-fill icone" viewBox="0 0 16 16">
-										<path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-										<path fill-Rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z" />
-										<path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+									<div className="">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-eyedropper icone" viewBox="0 0 16 16">
+										<path d="M13.354.646a1.207 1.207 0 0 0-1.708 0L8.5 3.793l-.646-.647a.5.5 0 1 0-.708.708L8.293 5l-7.147 7.146A.5.5 0 0 0 1 12.5v1.793l-.854.853a.5.5 0 1 0 .708.707L1.707 15H3.5a.5.5 0 0 0 .354-.146L11 7.707l1.146 1.147a.5.5 0 0 0 .708-.708l-.647-.646 3.147-3.146a1.207 1.207 0 0 0 0-1.708l-2-2zM2 12.707l7-7L10.293 7l-7 7H2v-1.293z" />
 									</svg>
 								</div>
 								<div className="">VACINAS</div>
@@ -69,7 +72,7 @@ export class Sistema extends Component {
 					</div>
 
 					<div id="divTeste" className="cards" >
-						<a onClick={() => { window.location.href = "/sistema" }} className="linkAcesso">
+						<a onClick={() => { window.location.href = "/configuracoes" }} className="linkAcesso">
 							<div className="area1">
 								<div className="">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-gear icone" viewBox="0 0 16 16">
@@ -80,7 +83,7 @@ export class Sistema extends Component {
 								<div className="">CONFIGURA&#199;&#213;ES</div>
 							</div>
 						</a>
-					</div>
+					</div>					
 
 					<div id="divSite" className="cards" >
 						<a onClick={() => { window.location.href = "/" }} className="linkAcesso">
@@ -97,6 +100,7 @@ export class Sistema extends Component {
 					</div>
 
 
+				</div>
 				</div>
 			</div>
         );

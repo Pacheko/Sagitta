@@ -8,6 +8,12 @@ export class PessoasCadastradas extends Component {
         this.state = { pessoas: [], loading: true };
     }
 
+    validar() {
+        if (sessionStorage.getItem("login") !== "true") {
+            window.location.href = "/loginMedicenter";
+        }
+    }
+
     componentDidMount() {
         this.popularPessoas();
     }
@@ -57,7 +63,7 @@ export class PessoasCadastradas extends Component {
             : PessoasCadastradas.renderPessoasTable(this.state.pessoas);
 
         return (
-            <div>
+            <div onLoad={this.validar()}>
                 <h1 id="tabelLabel" style={{ color: "white", marginTop: "10px" }}>Pessoas Cadastradas</h1>
                 <p style={{ color: "white" }}>Pessoas que se cadastraram diretamente no site.</p>
                 {contents}

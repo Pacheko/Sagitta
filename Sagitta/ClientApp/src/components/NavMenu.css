@@ -18,6 +18,17 @@
     color: #fff;
 }
 
+#logout.disable {
+    display:none;
+}
+
+#logout.active {
+    display: block;
+    color: #07fc62;
+    cursor: pointer;
+    font-weight: bold;
+}
+
 .areaCadastro {
     width: 700px;
     padding: 15px;
@@ -282,8 +293,14 @@
     flex-wrap: wrap;
 }
 
+.login {
+    padding: 25px;
+    border: 2px solid #fff;
+    border-radius: 5px;
+}
+
 .area1 {
-    width: 222px;
+    width: 247px;
     height: 115px;
     background: linear-gradient(180deg, #3da4cc, #012f56);
     text-align: center;

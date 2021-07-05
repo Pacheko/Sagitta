@@ -8,6 +8,10 @@ import { Sistema } from './components/Sistema';
 import { Cadastro } from './components/CadastroPessoa';
 import { Confirmacao } from './components/Confirmacao';
 import { VacinasCadastradas } from './components/VacinasCadastradas';
+import { LoginMedicenter } from './components/LoginMedicenter';
+import { NovoUsuario } from './components/NovoUsuario';
+import { NovaVacina } from './components/NovaVacina';
+import { Configuracoes } from './components/Configuracoes';
 
 
 import './custom.css'
@@ -27,6 +31,10 @@ export default class App extends Component {
                 <Route path='/cadastro' component={Cadastro} />
                 <Route path='/confirmacao' component={Confirmacao} />
                 <Route path='/finalizar' component={Finalizar} />
+                <Route path='/loginMedicenter' component={LoginMedicenter} />
+                <Route path='/novoUsuario' component={NovoUsuario} />
+                <Route path='/novaVacina' component={NovaVacina} />
+                <Route path='/configuracoes' component={Configuracoes} />
             </Layout>
         );
     }

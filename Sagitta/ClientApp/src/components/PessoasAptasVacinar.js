@@ -8,6 +8,12 @@ export class PessoasAptasVacinar extends Component {
         this.state = { pessoas: [], loading: true };
     }
 
+    validar() {
+        if (sessionStorage.getItem("login") !== "true") {
+            window.location.href = "/loginMedicenter";
+        }
+    }
+
     componentDidMount() {
         this.popularPessoas();
     }
@@ -57,7 +63,7 @@ export class PessoasAptasVacinar extends Component {
             : PessoasAptasVacinar.renderPT(this.state.pessoas);
 
         return (
-            <div>
+            <div onLoad={this.validar()}>
                 <h1 id="tabelLabel" style={{ color: "white", marginTop: "10px" }}>Pessoas que já podem se vacinar</h1>
                 <p style={{ color: "white" }}>Pessoas aptas a tomar a vacina.</p>
                 {contents}

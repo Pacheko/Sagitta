@@ -8,6 +8,12 @@ export class VacinasCadastradas extends Component {
         this.state = { tiposVacina: [], loading: true };
     }
 
+    validar() {
+        if (sessionStorage.getItem("login") !== "true") {
+            window.location.href = "/loginMedicenter";
+        }
+    }
+
     componentDidMount() {
         this.popularTipos();
     }
@@ -61,7 +67,7 @@ export class VacinasCadastradas extends Component {
             : VacinasCadastradas.renderTabela(this.state.tiposVacina);
 
         return (
-            <div>
+            <div onLoad={this.validar()}>
                 <h1 id="tabelLabel" style={{ color: "white", marginTop: "10px" }}>Tipos de Vacina</h1>
                 <p style={{ color: "white" }}>Vacinas cadastradas no sistema.</p>
                 {contents}
