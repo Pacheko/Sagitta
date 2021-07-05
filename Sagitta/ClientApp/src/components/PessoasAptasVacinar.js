@@ -22,7 +22,6 @@ export class PessoasAptasVacinar extends Component {
                         <th>Idade</th>
                         <th>Sexo</th>
                         <th>Fone</th>
-                        <th>Telegram</th>
                         <th>Email</th>
                         <th>Data Nascimento</th>
                         <th>Cidade</th>
@@ -39,7 +38,6 @@ export class PessoasAptasVacinar extends Component {
                             <td>{p.idade}</td>
                             <td>{p.sexo}</td>
                             <td>{p.fone}</td>
-                            <td>{p.telegram}</td>
                             <td>{p.email}</td>
                             <td>{p.dataNascimento}</td>
                             <td>{p.cidade}</td>

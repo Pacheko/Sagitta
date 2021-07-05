@@ -22,7 +22,6 @@ export class PessoasCadastradas extends Component {
                         <th>Idade</th>
                         <th>Sexo</th>
                         <th>Fone</th>
-                        <th>Telegram</th>
                         <th>Email</th>
                         <th>Data Nascimento</th>
                         <th>Cidade</th>
@@ -39,7 +38,6 @@ export class PessoasCadastradas extends Component {
                             <td>{p.idade}</td>
                             <td>{p.sexo}</td>
                             <td>{p.fone}</td>
-                            <td>{p.telegram}</td>
                             <td>{p.email}</td>
                             <td>{p.dataNascimento}</td>
                             <td>{p.cidade}</td>
@@ -68,7 +66,7 @@ export class PessoasCadastradas extends Component {
     }
 
     async popularPessoas() {
-        const response = await fetch('pessoa');
+        const response = await fetch('api/pessoa');
         const data = await response.json();
         this.setState({ pessoas: data, loading: false });
     }

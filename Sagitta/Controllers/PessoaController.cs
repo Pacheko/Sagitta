@@ -20,7 +20,6 @@ namespace Sagitta.Controllers
         public int Idade { get; set; }
         public string Sexo { get; set; }
         public string Fone { get; set; }
-        public string Telegram { get; set; }
         public string Email { get; set; }
         public string DataNascimento { get; set; }
         public string Cidade { get; set; }
@@ -30,20 +29,42 @@ namespace Sagitta.Controllers
     }
 
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class PessoaController : ControllerBase
     {
         [HttpGet]
-        public async Task<ActionResult<IEnumerable>> GetTodasPessoas()
+        public async Task<ActionResult<IEnumerable>> Get()
         {
             using var db = new AppDbContext();
 
-            //Cidade c = new Cidade()
+
+            //foreach (var item in db.Cidades)
+            //{
+            //    db.Cidades.Remove(item);
+            //}
+            //db.SaveChanges();
+
+            //Cidade c1 = new Cidade()
             //{
             //    NmCidade = "Venâncio Aires",
             //    NmUf = "Rio Grande do Sul",
             //    SiglaUf = "RS"
             //};
+            //Cidade c2 = new Cidade()
+            //{
+            //    NmCidade = "Santa Cruz do Sul",
+            //    NmUf = "Rio Grande do Sul",
+            //    SiglaUf = "RS"
+            //};
+            //Cidade c3 = new Cidade()
+            //{
+            //    NmCidade = "Montenegro",
+            //    NmUf = "Rio Grande do Sul",
+            //    SiglaUf = "RS"
+            //};
+
+            //db.Cidades.AddRange(c1, c2, c3);
+            //db.SaveChanges();
 
             //Pessoa a = new Pessoa()
             //{
@@ -89,7 +110,6 @@ namespace Sagitta.Controllers
                    Idade = pessoa.Idade,
                    Sexo = pessoa.Sexo,
                    Fone = pessoa.Fone,
-                   Telegram = pessoa.Telegram,
                    Email = pessoa.Email,
                    DataNascimento = pessoa.DataNascimento,
                    Cidade = cidade.NmCidade,
@@ -157,7 +177,6 @@ namespace Sagitta.Controllers
                    Idade = pessoa.Idade,
                    Sexo = pessoa.Sexo,
                    Fone = pessoa.Fone,
-                   Telegram = pessoa.Telegram,
                    Email = pessoa.Email,
                    DataNascimento = pessoa.DataNascimento,
                    Cidade = cidade.NmCidade,
@@ -176,25 +195,6 @@ namespace Sagitta.Controllers
 
             return db.Pessoas.Where(x => x.Id == 1).ToList();
         }
-
-
-        //[HttpPost("{nome}")]
-        //[ProducesResponseType(StatusCodes.Status201Created)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        ////public async Task<IActionResult> SalvarPessoa([FromBody] string nome, string idade)
-        //public void SalvarPessoa([FromBody] string nome)
-        //{
-        //    //if (!ModelState.IsValid)
-        //    //{
-        //    //    return BadRequest(ModelState);
-        //    //}
-        //    ////_context.Pessoas.Add(pessoa);
-        //    //await _context.SaveChangesAsync();
-        //    //  return CreatedAtAction("salvarpessoa");
-        //}
-
-
-
 
         [HttpPost]
         public async void PostProduto([FromForm] Pessoa pessoa)

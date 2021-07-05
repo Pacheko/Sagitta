@@ -14,7 +14,6 @@ namespace CalendarioCovid.Negocios.Models
         public int Idade { get; set; }
         public string Sexo { get; set; }
         public string Fone { get; set; }
-        public string Telegram { get; set; }
         public string Email { get; set; }
         public string DataNascimento { get; set; }
         public int CidadeId { get; set; }

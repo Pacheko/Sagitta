@@ -5,7 +5,7 @@ import { Home } from './components/Home';
 import { PessoasCadastradas } from './components/PessoasCadastradas';
 import { PessoasAptasVacinar } from './components/PessoasAptasVacinar';
 import { Sistema } from './components/Sistema';
-import { Cadastro } from './components/Cadastro';
+import { Cadastro } from './components/CadastroPessoa';
 import { Confirmacao } from './components/Confirmacao';
 import { VacinasCadastradas } from './components/VacinasCadastradas';
 

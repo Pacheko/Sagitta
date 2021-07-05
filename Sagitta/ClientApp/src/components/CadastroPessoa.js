@@ -1,20 +1,26 @@
 ﻿import { post } from 'jquery';
 import React, { Component } from 'react';
+import ComboCidade from './ComboCidade';
 
 export class Pessoa {
     constructor() {
-        this.id = 0;
         this.nome = "";
         this.cpf = "";
-        this.idade = "";
+        this.idade = 0;
         this.sexo = "";
-        this.telefone = "";
+        this.fone = "";
         this.email = "";
-        this.dataNasc = "";
-        this.cep = "";
-        this.cidade = "";
-        this.estado = "";
-        this.temComorbidade = "";
+        this.dataNascimento = "";
+        this.cidadeId = 0;
+    }
+}
+
+export class Cidade {
+    constructor() {
+        this.id = [];
+        this.nmCidade = [];
+        this.siglaUf = [];
+        this.nmUf = [];
     }
 }
 
@@ -25,8 +31,13 @@ export class Cadastro extends Component {
         super(props);
         this.state = {
             title: "",
-            pessoa: new Pessoa()
+            pessoa: new Pessoa(),
+            cidades: new Cidade()
         }
+    }
+
+    componentDidMount() {
+        this.popularCidades();
     }
 
     onChange(e) {
@@ -39,13 +50,8 @@ export class Cadastro extends Component {
         event.preventDefault();
 
         const data = new FormData(event.target);
-
-       
-        const response2 = fetch('/Pessoa/', { method: 'POST', body: data });
-/*        this.props.history.push('/fetch-pessoa');*/
+        const response2 = fetch('api/Pessoa/', { method: 'POST', body: data });
     }
-
-   
 
     render() {
         return (
@@ -72,15 +78,15 @@ export class Cadastro extends Component {
                                 <label for="sexo">SEXO</label>
                                 <select className="form-control" id="sexo" name="sexo" onChange={this.onChange.bind(this)}>
                                     <option selected>Escolha</option>
-                                    <option value="1">Masculino</option>
-                                    <option value="2">Feminino</option>
+                                    <option value="Masculino">Masculino</option>
+                                    <option value="Feminino">Feminino</option>
                                 </select>
                             </div>
                         </div>
                         <div className="form-group">
                             <div className="form-group col-md-6">
                                 <label for="telefone">Telefone</label>
-                                <input type="text" className="form-control" name="telefone" onChange={this.onChange.bind(this)} id="telefone" maxLength="11" placeholder="Telefone" autoComplete="off" />
+                                <input type="text" className="form-control" name="fone" onChange={this.onChange.bind(this)} id="fone" maxLength="11" placeholder="Telefone" autoComplete="off" />
                             </div>
                             <div className="form-group col-md-6">
                                 <label for="email">EMAIL</label>
@@ -89,33 +95,28 @@ export class Cadastro extends Component {
                         </div>
                         <div className="form-group">
                             <div className="form-group col-md-6">
-                                <label for="dataNasc">DATA DE NASCIMENTO</label>
-                                <input type="date" className="form-control" name="dataNasc" onChange={this.onChange.bind(this)} id="dataNasc" />
+                                <label for="dataNascimento">DATA DE NASCIMENTO</label>
+                                <input type="date" className="form-control" name="dataNascimento" onChange={this.onChange.bind(this)} id="dataNascimento" />
                             </div>
+
                             <div className="form-group col-md-6">
-                                <label for="cep">CEP</label>
-                                <input type="text" className="form-control" name="cep" onChange={this.onChange.bind(this)} id="cep" maxLength="8" placeholder="Cep" autoComplete="off" />
+                                <label for="cidadeId">Cidade</label>
+                                <ComboCidade id="cidadeId" onChange={this.onChange.bind(this)}></ComboCidade>
                             </div>
+
                         </div>
+
                         <div className="form-group">
                             <div className="form-group col-md-6">
-                                <label for="cidade">CIDADE</label>
-                                <input type="text" className="form-control" name="cidade" onChange={this.onChange.bind(this)} id="cidade" placeholder="Cidade" autoComplete="off" />
-                            </div>
-                            <div className="form-group col-md-6">
-                                <label for="estado">Estado</label>
-                                <input type="text" className="form-control" name="estado" onChange={this.onChange.bind(this)} id="estado" placeholder="Estado" autoComplete="off" />
-                            </div>
-                        </div>
-                        <div className="form-group">
-                            <div className="form-group col-md-6">
-                                <label for="temComorbidade">Tem comorbidade</label>
+                                <label for="temComorbidade">Grupo Especial?</label>
                                 <select className="form-control" id="temComorbidade" name="temComorbidade" onChange={this.onChange.bind(this)}>
                                     <option selected>Escolha</option>
                                     <option value="1">Sim</option>
                                     <option value="2">Não</option>
                                 </select>
                             </div>
+
+
                             <div className="form-group col-md-12 botaoAlinhar" align="center">
                                 <button id="botaoSalvar" type="submit" className="btn btn-light botao">SALVAR</button>
                             </div>
@@ -129,5 +130,9 @@ export class Cadastro extends Component {
         );
     }
 
-
+    async popularCidades() {
+        const response = await fetch('api/cidade');
+        const data = await response.json();
+        this.setState({ cidades: data });
+    }
 }
