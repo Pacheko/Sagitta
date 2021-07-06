@@ -197,7 +197,7 @@ namespace Sagitta.Controllers
         }
 
         [HttpPost]
-        public async void PostProduto([FromForm] Pessoa pessoa)
+        public async void PostNovoCadastro([FromForm] Pessoa pessoa)
         {
             using var db = new AppDbContext();
 

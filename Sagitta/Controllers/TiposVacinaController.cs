@@ -11,7 +11,7 @@ using CalendarioCovid.Negocios.Models;
 namespace Sagitta.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class TiposVacinaController : ControllerBase
     {
         [HttpGet]
@@ -34,9 +34,18 @@ namespace Sagitta.Controllers
             //db.TipoVacinas.Add(t);
             //db.TipoVacinas.Add(t2);
 
-            //db.SaveChanges();
+           // db.SaveChanges();
 
             return await db.TipoVacinas.ToArrayAsync();
+        }
+
+        [HttpPost]
+        public async void PostNovoCadastro([FromForm] TipoVacina tipoVacina)
+        {
+            using var db = new AppDbContext();
+
+            db.TipoVacinas.Add(tipoVacina);
+            db.SaveChanges();
         }
     }
 }

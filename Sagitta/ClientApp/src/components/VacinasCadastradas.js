@@ -76,7 +76,7 @@ export class VacinasCadastradas extends Component {
     }
 
     async popularTipos() {
-        const response = await fetch('tiposvacina');
+        const response = await fetch('api/tiposvacina');
         const data = await response.json();
         this.setState({ tiposVacina: data, loading: false });
     }

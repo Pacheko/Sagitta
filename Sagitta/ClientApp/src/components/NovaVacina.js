@@ -1,8 +1,23 @@
 ﻿import React, { Component } from 'react';
 
+export class TipoVacina {
+    constructor() {
+        this.id = [];
+        this.nmVacina = [];
+        this.qtDoses = [];
+    }
+}
 
 export class NovaVacina extends Component {
     static displayName = NovaVacina.name;
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            title: "",
+            tipoVacina: new TipoVacina()
+        }
+    }
 
     onChange(e) {
         this.setState({
@@ -13,6 +28,8 @@ export class NovaVacina extends Component {
     handleSalvar(event) {
         event.preventDefault();
 
+        const data = new FormData(event.target);
+        const response2 = fetch('api/tiposvacina/', { method: 'POST', body: data });
     }
     
     render() {
@@ -24,11 +41,11 @@ export class NovaVacina extends Component {
                         <div className="form-group">
                             <div className="form-group col-md-6">
                                 <label for="nome">NOME</label>
-                                <input type="text" name="nome" onChange={this.onChange.bind(this)} className="form-control" id="nome" placeholder="Nome" required autoComplete="off" />
+                                <input type="text" name="nmVacina" onChange={this.onChange.bind(this)} className="form-control" id="nmVacina" placeholder="Nome" required autoComplete="off" />
                             </div>
                             <div className="form-group col-md-6">
                                 <label for="doses">QTD DOSES</label>
-                                <input type="number" min="0" name="doses" onChange={this.onChange.bind(this)} className="form-control" id="doses" placeholder="Qtd doses" required autoComplete="off" />
+                                <input type="number" min="1" name="qtDoses" onChange={this.onChange.bind(this)} className="form-control" id="qtDoses" placeholder="Qtd doses" required autoComplete="off" />
                             </div>
                         </div>
                         
