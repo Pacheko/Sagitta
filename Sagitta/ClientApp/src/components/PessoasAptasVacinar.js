@@ -20,6 +20,7 @@ export class PessoasAptasVacinar extends Component {
 
     static renderPT(pessoas) {
         return (
+            <div className="table-responsive">
             <table className='table table-striped' aria-labelledby="tabelLabel">
                 <thead>
                     <tr>
@@ -53,7 +54,8 @@ export class PessoasAptasVacinar extends Component {
                         </tr>
                     )}
                 </tbody>
-            </table>
+                </table>
+            </div>
         );
     }
 

@@ -254,6 +254,12 @@
 
 .table {
     background-color: azure !important;
+    text-align: center;
+    border-radius:5px;
+}
+
+.table-responsive {
+    border-radius:5px !important;
 }
 
 .hexagon-item {

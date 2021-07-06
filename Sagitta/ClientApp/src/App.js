@@ -12,10 +12,12 @@ import { LoginMedicenter } from './components/LoginMedicenter';
 import { NovoUsuario } from './components/NovoUsuario';
 import { NovaVacina } from './components/NovaVacina';
 import { Configuracoes } from './components/Configuracoes';
-
+import { CadastroCidade } from './components/CadastroCidade';
+import { GrupoEspecial } from './components/GrupoEspecial';
 
 import './custom.css'
 import { Finalizar } from './components/Finalizar';
+
 
 export default class App extends Component {
     static displayName = App.name;
@@ -35,6 +37,8 @@ export default class App extends Component {
                 <Route path='/novoUsuario' component={NovoUsuario} />
                 <Route path='/novaVacina' component={NovaVacina} />
                 <Route path='/configuracoes' component={Configuracoes} />
+                <Route path='/cadastroCidade' component={CadastroCidade} />
+                <Route path='/grupoEspecial' component={GrupoEspecial} />
             </Layout>
         );
     }

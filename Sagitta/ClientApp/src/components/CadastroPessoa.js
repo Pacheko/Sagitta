@@ -52,6 +52,7 @@ export class Cadastro extends Component {
 
         const data = new FormData(event.target);
         const response2 = fetch('api/Pessoa/', { method: 'POST', body: data });
+        window.location.href = "/confirmacao";
     }
 
     render() {

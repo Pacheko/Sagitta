@@ -39,6 +39,7 @@ export class VacinasCadastradas extends Component {
 
     static renderTabela(tiposVacina) {
         return (
+            <div className="table-responsive">
             <table className='table table-striped' aria-labelledby="tabelLabel">
                 <thead>
                     <tr>
@@ -59,7 +60,8 @@ export class VacinasCadastradas extends Component {
                         </tr>
                     )}
                 </tbody>
-            </table>
+                </table>
+            </div>
         );
     }
 
@@ -72,7 +74,7 @@ export class VacinasCadastradas extends Component {
             <div onLoad={this.validar()}>
                 <h1 id="tabelLabel" style={{ color: "white", marginTop: "10px" }}>Tipos de Vacina</h1>
                 <p style={{ color: "white" }}>Vacinas cadastradas no sistema.</p>
-                <a id="botaoNovaVacina" className="btn btn-primary botao" onClick={() => { window.location.href = "/novaVacina" }}>+ NOVA VACINA</a>
+                <a id="botaoNovaVacina" style={{ marginBottom: "15px" }} className="btn btn-primary botao" onClick={() => { window.location.href = "/novaVacina" }}>+ NOVA VACINA</a>
                 {contents}
             </div>
         );

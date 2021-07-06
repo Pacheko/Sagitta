@@ -20,6 +20,7 @@ export class PessoasCadastradas extends Component {
 
     static renderPessoasTable(pessoas) {
         return (
+            <div className="table-responsive">
             <table className='table table-striped' aria-labelledby="tabelLabel">
                 <thead>
                     <tr>
@@ -53,7 +54,8 @@ export class PessoasCadastradas extends Component {
                         </tr>
                     )}
                 </tbody>
-            </table>
+                </table>
+            </div>
         );
     }
 
