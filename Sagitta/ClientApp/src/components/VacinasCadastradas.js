@@ -1,4 +1,5 @@
 ﻿import React, { Component } from 'react';
+import Swal from 'sweetalert2'
 
 export class VacinasCadastradas extends Component {
     static displayName = "Vacinas Cadastradas";
@@ -30,7 +31,8 @@ export class VacinasCadastradas extends Component {
             fetch('api/produtos/' + id, { method: 'delete' })
                 .then(json => {
                     window.location.href = "fetch-produto";
-                    alert('Deletado com Sucesso!');
+                    Swal.fire('Deletado com Sucesso!', '', 'success')                   
+                    /*alert('Deletado com Sucesso!');*/
                 })
         }
     }
@@ -70,6 +72,7 @@ export class VacinasCadastradas extends Component {
             <div onLoad={this.validar()}>
                 <h1 id="tabelLabel" style={{ color: "white", marginTop: "10px" }}>Tipos de Vacina</h1>
                 <p style={{ color: "white" }}>Vacinas cadastradas no sistema.</p>
+                <a id="botaoNovaVacina" className="btn btn-primary botao" onClick={() => { window.location.href = "/novaVacina" }}>+ NOVA VACINA</a>
                 {contents}
             </div>
         );
