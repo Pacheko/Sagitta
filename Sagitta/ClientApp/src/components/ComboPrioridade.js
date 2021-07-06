@@ -19,7 +19,7 @@ export default class ComboPrioridade extends Component {
         return (
             <div>
                 <select className="form-control" id={this.state.componenteId} name={this.state.componenteId}>
-                    <option selected key={-1}>Sem Prioridade</option>
+                    {/*<option selected>Sem Prioridade</option>*/}
                     {this.renderOption()}
                 </select>
             </div >

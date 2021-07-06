@@ -39,7 +39,6 @@ export class Cadastro extends Component {
     }
 
     componentDidMount() {
-        /*this.popularCidades();*/
     }
 
     onChange(e) {
@@ -124,11 +123,5 @@ export class Cadastro extends Component {
                 </form >
             </div>
         );
-    }
-
-    async popularCidades() {
-        const response = await fetch('api/cidade');
-        const data = await response.json();
-        this.setState({ cidades: data });
     }
 }
