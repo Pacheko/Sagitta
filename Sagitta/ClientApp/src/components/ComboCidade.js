@@ -17,12 +17,12 @@ export default class ComboCidade extends Component {
 
     render() {
         return (
-            <div>
+            
                 <select className="form-control" id={this.state.componenteId} name={this.state.componenteId}>
                     <option selected>Escolha</option>
                     {this.renderOption()}
                 </select>
-            </div>
+            
         );
     }
 
