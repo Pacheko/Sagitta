@@ -201,10 +201,15 @@ namespace Sagitta.Controllers
         {
             using var db = new AppDbContext();
 
+            var semPrioridade = db.Prioridades.First(x => x.NmGrupo == "Sem Prioridade");
+
+            if (pessoa.PrioridadeId == semPrioridade.Id)
+            {
+                pessoa.PrioridadeId = null;
+            }
+
             db.Pessoas.Add(pessoa);
             db.SaveChanges();
-
-
         }
     }
 }

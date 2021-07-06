@@ -18,12 +18,22 @@ namespace Sagitta.Controllers
         {
             using var db = new AppDbContext();
 
+            //foreach (var item in db.Prioridades)
+            //{
+            //    db.Prioridades.Remove(item);
+            //}
+            //db.SaveChanges();
+
+            //db.Prioridades.Add(new CalendarioCovid.Negocios.Models.Prioridade() { NmGrupo = "Sem Prioridade", IsComorbidade = false });
             //db.Prioridades.Add(new CalendarioCovid.Negocios.Models.Prioridade() { NmGrupo = "Professores", IsComorbidade = false });
             //db.Prioridades.Add(new CalendarioCovid.Negocios.Models.Prioridade() { NmGrupo = "Profissionais da Saude", IsComorbidade = false });
             //db.Prioridades.Add(new CalendarioCovid.Negocios.Models.Prioridade() { NmGrupo = "Pressão Alta", IsComorbidade = true });
             //db.Prioridades.Add(new CalendarioCovid.Negocios.Models.Prioridade() { NmGrupo = "Asma", IsComorbidade = true });
 
+
+
             //db.SaveChanges();
+
 
             return await db.Prioridades.ToListAsync();
         }

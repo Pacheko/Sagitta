@@ -20,6 +20,34 @@ namespace Sagitta.Controllers
         public async Task<ActionResult<IEnumerable>> Get()
         {
             using var db = new AppDbContext();
+
+            //db.Cidades.Add(new Cidade()
+            //{
+            //    NmCidade = "Venâncio Aires",
+            //    NmUf = "Rio Grande do Sul",
+            //    SiglaUf = "RS"
+            //});
+            //db.Cidades.Add(new Cidade()
+            //{
+            //    NmCidade = "Santa Cruz do Sul",
+            //    NmUf = "Rio Grande do Sul",
+            //    SiglaUf = "RS"
+            //});
+            //db.Cidades.Add(new Cidade()
+            //{
+            //    NmCidade = "Porto Alegre",
+            //    NmUf = "Rio Grande do Sul",
+            //    SiglaUf = "RS"
+            //});
+            //db.Cidades.Add(new Cidade()
+            //{
+            //    NmCidade = "Montenegro",
+            //    NmUf = "Rio Grande do Sul",
+            //    SiglaUf = "RS"
+            //});
+            //db.SaveChanges();
+
+
             return await db.Cidades.ToListAsync();
         }
     }
