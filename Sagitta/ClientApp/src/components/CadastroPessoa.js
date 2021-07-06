@@ -1,6 +1,7 @@
 ﻿import { post } from 'jquery';
 import React, { Component } from 'react';
 import ComboCidade from './ComboCidade';
+import ComboPrioridade from './ComboPrioridade';
 
 export class Pessoa {
     constructor() {
@@ -12,6 +13,7 @@ export class Pessoa {
         this.email = "";
         this.dataNascimento = "";
         this.cidadeId = 0;
+        this.prioridadeId = -1;
     }
 }
 
@@ -37,7 +39,7 @@ export class Cadastro extends Component {
     }
 
     componentDidMount() {
-        this.popularCidades();
+        /*this.popularCidades();*/
     }
 
     onChange(e) {
@@ -103,20 +105,14 @@ export class Cadastro extends Component {
                                 <label for="cidadeId">Cidade</label>
                                 <ComboCidade id="cidadeId" onChange={this.onChange.bind(this)}></ComboCidade>
                             </div>
-
                         </div>
 
                         <div className="form-group">
                             <div className="form-group col-md-6">
-                                <label for="temComorbidade">Grupo Especial?</label>
-                                <select className="form-control" id="temComorbidade" name="temComorbidade" onChange={this.onChange.bind(this)}>
-                                    <option selected>Escolha</option>
-                                    <option value="1">Sim</option>
-                                    <option value="2">Não</option>
-                                </select>
+                                <label for="cidadeId">Grupo Especial?</label>
+                                <ComboPrioridade id="prioridadeId" onChange={this.onChange.bind(this)}></ComboPrioridade>
                             </div>
-
-
+   
                             <div className="form-group col-md-12 botaoAlinhar" align="center">
                                 <button id="botaoSalvar" type="submit" className="btn btn-light botao">SALVAR</button>
                             </div>

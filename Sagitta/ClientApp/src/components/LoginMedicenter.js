@@ -29,7 +29,7 @@ export class LoginMedicenter extends Component {
                             <label for="senha">Senha</label>
                             <input type="password" className="form-control" name="senha" id="senha" placeholder="Senha" />
                         </div>
-                        <button id="botaoInicio" type="submit" style={{ marginTop: "15px" }} className="btn btn-primary botao">LOGIN</button>           
+                        <button id="botaoLogin" type="submit" style={{ marginTop: "15px" }} className="btn btn-primary botao">LOGIN</button>           
                     </div>
                 </form>
             </div>
