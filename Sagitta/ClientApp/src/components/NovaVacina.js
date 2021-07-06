@@ -30,8 +30,10 @@ export class NovaVacina extends Component {
 
         const data = new FormData(event.target);
         const response2 = fetch('api/tiposvacina/', { method: 'POST', body: data });
+        window.location.href = "/vacinascadastradas";
     }
-    
+
+
     render() {
         return (
             <div>
@@ -48,12 +50,12 @@ export class NovaVacina extends Component {
                                 <input type="number" min="1" name="qtDoses" onChange={this.onChange.bind(this)} className="form-control" id="qtDoses" placeholder="Qtd doses" required autoComplete="off" />
                             </div>
                         </div>
-                        
+
                         <div className="form-group col-md-12 botaoAlinhar" align="center">
                             <button id="botaoSalvar" type="submit" className="btn btn-light botao">SALVAR</button>
                         </div>
 
-                    </div>                   
+                    </div>
                 </form >
             </div>
         );
