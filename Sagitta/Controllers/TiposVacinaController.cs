@@ -45,7 +45,64 @@ namespace Sagitta.Controllers
             using var db = new AppDbContext();
 
             db.TipoVacinas.Add(tipoVacina);
-            db.SaveChanges();
+           await db.SaveChangesAsync();
+
+            //return CreatedAtAction("GetProduto", new { id = produto.Id }, produto);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> EditarVacina(int id, [FromForm] TipoVacina vacina)
+        {
+            if (id != vacina.Id)
+            {
+                return BadRequest();
+            }
+
+            using var db = new AppDbContext();
+
+            db.Entry(vacina).State = EntityState.Modified;
+
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!VacinaExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteVacina(int id)
+        {
+            using var db = new AppDbContext();
+
+            var vacina = await db.TipoVacinas.FindAsync(id);
+            if (vacina == null)
+            {
+                return NotFound();
+            }
+
+            db.TipoVacinas.Remove(vacina);
+            await db.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        private bool VacinaExists(int id)
+        {
+            using var db = new AppDbContext();
+
+            return db.TipoVacinas.Any(e => e.Id == id);
         }
     }
 }

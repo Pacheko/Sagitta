@@ -20,17 +20,17 @@ export class VacinasCadastradas extends Component {
     }
 
     static handleEdit(id) {
-        window.location.href = "/produto/edit/" + id;
+        window.location.href = "/novaVacina/id:" + id;
     }
 
-    static handleDelete(id) {
-        if (!window.confirm("Você deseja deletar a vacina : " + id + "?")) {
+    static handleDelete(id, nome) {
+        if (!window.confirm("Você deseja deletar a vacina : " + nome + "?")) {
             return;
         }
         else {
-            fetch('api/produtos/' + id, { method: 'delete' })
+            fetch('api/tiposvacina/' + id, { method: 'delete' })
                 .then(json => {
-                    window.location.href = "fetch-produto";
+                    window.location.href = "vacinascadastradas";
                     Swal.fire('Deletado com Sucesso!', '', 'success')                   
                     /*alert('Deletado com Sucesso!');*/
                 })
@@ -54,8 +54,8 @@ export class VacinasCadastradas extends Component {
                             <td>{p.nmVacina}</td>
                             <td>{p.qtDoses}</td>
                             <td>
-                                <button className="btn btn-success" onClick={(id) => this.handleEdit(p.nmVacina)}>Editar</button> &nbsp;
-                                <button className="btn btn-danger" onClick={(id) => this.handleDelete(p.nmVacina)}>Deletar</button>
+                                <button className="btn btn-success" onClick={(id) => this.handleEdit(p.id)}>Editar</button> &nbsp;
+                                <button className="btn btn-danger" onClick={(id, nome) => this.handleDelete(p.id, p.nmVacina)}>Deletar</button>
                             </td>
                         </tr>
                     )}

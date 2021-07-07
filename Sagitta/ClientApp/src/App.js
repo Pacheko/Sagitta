@@ -35,7 +35,10 @@ export default class App extends Component {
                 <Route path='/finalizar' component={Finalizar} />
                 <Route path='/loginMedicenter' component={LoginMedicenter} />
                 <Route path='/novoUsuario' component={NovoUsuario} />
+
                 <Route path='/novaVacina' component={NovaVacina} />
+                <Route path='/novaVacina/edit/:id' component={NovaVacina} />
+
                 <Route path='/configuracoes' component={Configuracoes} />
                 <Route path='/cadastroCidade' component={CadastroCidade} />
                 <Route path='/grupoEspecial' component={GrupoEspecial} />
