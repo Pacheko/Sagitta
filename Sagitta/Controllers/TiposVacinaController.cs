@@ -17,6 +17,7 @@ namespace Sagitta.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable>> GetTodasVacinas()
         {
+            
             using var db = new AppDbContext();
 
             //TipoVacina t = new TipoVacina()
@@ -35,7 +36,7 @@ namespace Sagitta.Controllers
             //db.TipoVacinas.Add(t2);
 
            // db.SaveChanges();
-
+           
             return await db.TipoVacinas.ToArrayAsync();
         }
 
@@ -48,6 +49,15 @@ namespace Sagitta.Controllers
            await db.SaveChangesAsync();
 
             //return CreatedAtAction("GetProduto", new { id = produto.Id }, produto);
+        }
+
+        [HttpGet("{id}")]
+        public IEnumerable<TipoVacina> CarregarVacina(int id)
+        {
+            using var db = new AppDbContext();
+          
+            return db.TipoVacinas.Where(x => x.Id == id).ToList();        
+                    
         }
 
         [HttpPut("{id}")]

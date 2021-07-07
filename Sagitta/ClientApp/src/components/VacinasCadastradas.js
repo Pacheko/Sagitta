@@ -19,9 +19,9 @@ export class VacinasCadastradas extends Component {
         this.popularTipos();
     }
 
-    static handleEdit(id) {
-        window.location.href = "/novaVacina/id:" + id;
-    }
+    //static handleEdit(id) {
+    //    window.location.href = "/novaVacina/edit?id=" + id;
+    //}
 
     static handleDelete(id, nome) {
         if (!window.confirm("Você deseja deletar a vacina : " + nome + "?")) {
@@ -54,7 +54,7 @@ export class VacinasCadastradas extends Component {
                             <td>{p.nmVacina}</td>
                             <td>{p.qtDoses}</td>
                             <td>
-                                <button className="btn btn-success" onClick={(id) => this.handleEdit(p.id)}>Editar</button> &nbsp;
+                                <button className="btn btn-success" onClick={(id) => { window.location.href = "/novaVacina/edit?id=" + p.id }}>Editar</button> &nbsp;
                                 <button className="btn btn-danger" onClick={(id, nome) => this.handleDelete(p.id, p.nmVacina)}>Deletar</button>
                             </td>
                         </tr>
