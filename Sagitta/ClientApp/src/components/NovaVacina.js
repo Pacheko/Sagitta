@@ -52,7 +52,7 @@ export class NovaVacina extends Component {
         }
         else {
 
-            this.state = {tipoVacina: [ "",  ""] };
+            this.state = {tipoVacina: [""] };
         }
 
     }
