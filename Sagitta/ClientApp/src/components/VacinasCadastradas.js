@@ -24,17 +24,35 @@ export class VacinasCadastradas extends Component {
     //}
 
     static handleDelete(id, nome) {
-        if (!window.confirm("Você deseja deletar a vacina : " + nome + "?")) {
-            return;
-        }
-        else {
-            fetch('api/tiposvacina/' + id, { method: 'delete' })
-                .then(json => {
-                    window.location.href = "vacinascadastradas";
-                    Swal.fire('Deletado com Sucesso!', '', 'success')                   
-                    /*alert('Deletado com Sucesso!');*/
-                })
-        }
+        Swal.fire({
+            title: 'Você deseja deletar a vacina : ' + nome + '?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'SIM',
+            cancelButtonText: 'NÃO'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch('api/tiposvacina/' + id, { method: 'delete' })
+                    .then(json => {
+                        Swal.fire({ icon: 'success', title: 'Deletado com sucesso!', showConfirmButton: false});
+                        window.location.href = "vacinascadastradas";
+                    })
+            }
+        })
+
+
+        //if (!window.confirm("Você deseja deletar a vacina : " + nome + "?")) {
+        //    return;
+        //}
+        //else {
+        //    fetch('api/tiposvacina/' + id, { method: 'delete' })
+        //        .then(json => {
+        //            Swal.fire('Deletado com Sucesso!', '', 'success');      
+        //            window.location.href = "vacinascadastradas";
+        //        })
+        //}
     }
 
     static renderTabela(tiposVacina) {

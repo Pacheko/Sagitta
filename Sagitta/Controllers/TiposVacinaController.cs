@@ -41,21 +41,31 @@ namespace Sagitta.Controllers
         }
 
         [HttpPost]
-        public async void PostNovoCadastro([FromForm] TipoVacina tipoVacina)
+        public async Task<ActionResult<TipoVacina>> PostNovoCadastro([FromForm] TipoVacina vacina)
         {
             using var db = new AppDbContext();
 
-            db.TipoVacinas.Add(tipoVacina);
-           await db.SaveChangesAsync();
+            db.TipoVacinas.Add(vacina);
+           
+            await db.SaveChangesAsync();
 
-            //return CreatedAtAction("GetProduto", new { id = produto.Id }, produto);
+            
+            return CreatedAtAction("GetTodasVacinas", new { id = vacina.Id }, vacina);
         }
 
         [HttpGet("{id}")]
-        public IEnumerable<TipoVacina> CarregarVacina(int id)
+        public async Task<IEnumerable<TipoVacina>> CarregarVacinaAsync(int id)
         {
+            
             using var db = new AppDbContext();
-          
+
+            var vacina = await db.TipoVacinas.FindAsync(id);
+
+            if (vacina == null)
+            {
+                return (IEnumerable<TipoVacina>)NotFound();
+            }
+
             return db.TipoVacinas.Where(x => x.Id == id).ToList();        
                     
         }

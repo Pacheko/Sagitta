@@ -17,6 +17,7 @@ import { GrupoEspecial } from './components/GrupoEspecial';
 
 import './custom.css'
 import { Finalizar } from './components/Finalizar';
+import { CidadesCadastradas } from './components/CidadesCadastradas';
 
 
 export default class App extends Component {
@@ -37,10 +38,12 @@ export default class App extends Component {
                 <Route path='/novoUsuario' component={NovoUsuario} />
 
                 <Route path='/novaVacina' component={NovaVacina} />
-                <Route path='/novaVacina/edit' component={NovaVacina} />
+                <Route path='/novaVacina/edit/:id' component={NovaVacina} />
 
                 <Route path='/configuracoes' component={Configuracoes} />
                 <Route path='/cadastroCidade' component={CadastroCidade} />
+                <Route path='/cadastroCidade/edit/:id' component={CadastroCidade} />
+                <Route path='/cidadesCadastradas' component={CidadesCadastradas} />
                 <Route path='/grupoEspecial' component={GrupoEspecial} />
             </Layout>
         );
