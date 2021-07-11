@@ -14,7 +14,6 @@ import { NovaVacina } from './components/NovaVacina';
 import { Configuracoes } from './components/Configuracoes';
 import { CadastroCidade } from './components/CadastroCidade';
 import { GrupoEspecial } from './components/GrupoEspecial';
-import { AdmCadastrados } from './components/AdmCadastrados';
 
 import './custom.css'
 import { Finalizar } from './components/Finalizar';
@@ -37,7 +36,6 @@ export default class App extends Component {
                 <Route path='/finalizar' component={Finalizar} />
                 <Route path='/loginMedicenter' component={LoginMedicenter} />
                 <Route path='/novoUsuario' component={NovoUsuario} />
-                <Route path='/novoUsuario/edit/:id' component={NovoUsuario} />
 
                 <Route path='/novaVacina' component={NovaVacina} />
                 <Route path='/novaVacina/edit/:id' component={NovaVacina} />
@@ -47,7 +45,6 @@ export default class App extends Component {
                 <Route path='/cadastroCidade/edit/:id' component={CadastroCidade} />
                 <Route path='/cidadesCadastradas' component={CidadesCadastradas} />
                 <Route path='/grupoEspecial' component={GrupoEspecial} />
-                <Route path='/admCadastrados' component={AdmCadastrados} />
             </Layout>
         );
     }
