@@ -11,11 +11,11 @@ namespace CalendarioCovid.Negocios.Models
         public string Senha { get; set; }
         //public Pessoa Pessoa { get; set; }
 
-        public Administrador() { }
-        public Administrador(string login, string senha)
-        {
-            Login = login;
-            Senha = senha;
-        }
+        //public Administrador() { }
+        //public Administrador(string login, string senha)
+        //{
+        //    Login = login;
+        //    Senha = senha;
+        //}
     }
 }

@@ -46,7 +46,7 @@ export class PessoasCadastradas extends Component {
                             <td>{p.sexo}</td>
                             <td>{p.fone}</td>
                             <td>{p.email}</td>
-                            <td>{p.dataNascimento}</td>
+                            <td>{p.dataNascimento.replaceAll('-', '/').split('/').reverse().join('/')}</td>
                             <td>{p.cidade}</td>
                             <td>{p.estado}</td>
                             <td>{p.grupo}</td>

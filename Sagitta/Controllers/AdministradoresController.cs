@@ -101,32 +101,13 @@ namespace Sagitta.Controllers
             return NoContent();
         }
 
-        //[HttpPost("{login}")]
-        //public async Task<IActionResult> GetLogin([FromForm] Administrador adm)
-        //{
-        //    using var db = new AppDbContext();
-
-            
-        //    var contato = await db.Administradores.FindAsync(adm);
-            
-        //    return Ok(contato);
-  
-        //}
-
         [HttpPost("{login}")]
-        public async Task<IEnumerable<Administrador>> CarregarLoginAsync(string login)
+        public async Task<ActionResult<IEnumerable>> CarregarLoginAsync([FromForm] Administrador adm)
         {
 
             using var db = new AppDbContext();
-
-            var adm = await db.Administradores.FindAsync(login);
-
-            if (adm == null)
-            {
-                return (IEnumerable<Administrador>)NotFound();
-            }
-
-            return db.Administradores.Where(x => x.Login == login).ToList();
+         
+            return await db.Administradores.Where(x => x.Login == adm.Login & x.Senha == adm.Senha).ToArrayAsync();
 
         }
 

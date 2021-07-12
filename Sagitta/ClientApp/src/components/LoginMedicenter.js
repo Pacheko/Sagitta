@@ -14,7 +14,7 @@ export class LoginMedicenter extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { title: "", admNovo: new NovoAdm(), loading: true };
+        this.state = { title: "", admNovo: new NovoAdm(), loading: true, resultado:[] };
         this.intialize();
 
         this.handleSalve = this.handleSalve.bind(this);
@@ -27,44 +27,29 @@ export class LoginMedicenter extends Component {
         
     }
 
+    
     handleSalve(event) {
+
         event.preventDefault();
 
-        const data2 = new FormData(event.target);
+        const data = new FormData(event.target);
 
-        this.teste(data2);
-
-        fetch('api/tiposvacina/' + id, { method: 'POST', body: data2 })
+        fetch('api/administradores/login', { method: 'POST', body: data })
             .then(res => res.json())
             .then(res => {
                 this.setState({
-                    admNovo: res
+                    resultado: res
                 });
+                const { resultado } = this.state;
+                var id = resultado.map((resultado) => resultado.id);
+                if (id > 0) {
+                    sessionStorage.setItem("login", "true");
+                    window.location.href = "/sistema";
+                } else {
+                    Swal.fire('Usuário ou Senha inválidos!')
+                } 
             });
-
-        //const response = fetch('api/administradores/login');
-        //const data = response.json();
-        //this.setState({ title: "", admNovo: data, loading: false });
-
         
-        
-    }
-
-    handleSalve(login, senha) {
-
-        const response =  fetch('api/administradores/login' + login);
-        const data =  response.json();
-        this.setState({ title: "", admNovo: data, loading: false });
-
-        const { admNovo } = this.state;
-
-        if (admNovo.id > 0) {
-            sessionStorage.setItem("login", "true");
-            window.location.href = "/sistema";
-        } else {
-            Swal.fire('Usuário ou Senha inválidos!')
-        } 
-
     }
 
     render() {
@@ -85,20 +70,20 @@ export class LoginMedicenter extends Component {
         
         return (
             <div>
-                
-                <form id="form1" class="areaForm">
+
+                <form id="form1" className="areaForm" onSubmit={this.handleSalve}>
                     {admNovo.map(p => (
 
                     <div className="alinhaCentro login">
                         <div className="form-group">
-                            <label for="login">Usuário</label>
+                            <label htmlFor="login">Usuário</label>
                             <input type="text" className="form-control" name="Login" defaultValue={p.login} id="login" placeholder="Usuário" required />
                         </div>
                         <div className="form-group">
-                            <label for="senha">Senha</label>
-                            <input type="password" className="form-control" name="Senha" defaultValue={p.senha} id="senha" placeholder="Senha" />
+                            <label htmlFor="senha">Senha</label>
+                            <input type="password" className="form-control" name="Senha" defaultValue={p.senha} id="senha" placeholder="Senha" required />
                         </div>
-                            <button id="botaoLogin" type="submit" style={{ marginTop: "15px" }} onClick={(id, nome) => this.handleSalve(p.id, p.nmVacina)} className="btn btn-primary botao">LOGIN</button>           
+                            <button id="botaoLogin" type="submit" style={{ marginTop: "15px" }} className="btn btn-primary botao">LOGIN</button>           
                     </div>
    
                     ))}

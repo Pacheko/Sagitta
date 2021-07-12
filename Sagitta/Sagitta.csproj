@@ -16,13 +16,18 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="ClientApp\src\funcoes\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="ClientApp\src\funcoes\**" />
+    <EmbeddedResource Remove="ClientApp\src\funcoes\**" />
     <None Remove="$(SpaRoot)**" />
+    <None Remove="ClientApp\src\funcoes\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="ClientApp\src\components\ComboCidade.js" />
+    <None Remove="ClientApp\src\funcoes\mascaras.js" />
   </ItemGroup>
 
   <ItemGroup>

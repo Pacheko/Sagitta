@@ -19,24 +19,37 @@ export class AdmCadastrados extends Component {
         this.popularTipos();
     }
 
+    static handleEditar(id) {
+        if (id == 2) {
+            Swal.fire('Não é possivel editar o usuário Master!')
+        } else {
+            window.location.href = "/novoUsuario/edit?id=" + id
+        }
+    }
+
     static handleDelete(id, nome) {
-        Swal.fire({
-            title: 'Você deseja deletar o usuário : ' + nome + '?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'SIM',
-            cancelButtonText: 'NÃO'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                fetch('api/administradores/' + id, { method: 'delete' })
-                    .then(json => {
-                        Swal.fire({ icon: 'success', title: 'Deletado com sucesso!', showConfirmButton: false });
-                        window.location.href = "admCadastrados";
-                    })
-            }
-        })
+        if (id == 2) {
+            Swal.fire('Não é possivel deletar o usuário Master!')
+        } else {
+            Swal.fire({
+                title: 'Você deseja deletar o usuário : ' + nome + '?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'SIM',
+                cancelButtonText: 'NÃO'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch('api/administradores/' + id, { method: 'delete' })
+                        .then(json => {
+                            Swal.fire({ icon: 'success', title: 'Deletado com sucesso!', showConfirmButton: false });
+                            window.location.href = "admCadastrados";
+                        })
+                }
+            })
+        }
+  
     }
 
     static renderTabela(adm) {
@@ -56,8 +69,8 @@ export class AdmCadastrados extends Component {
                                 <td>{p.login}</td>
                                 <td>{p.senha}</td>
                                 <td>
-                                    <button className="btn btn-success" onClick={(id) => { window.location.href = "/novoUsuario/edit?id=" + p.id }}>Editar</button> &nbsp;
-                                <button className="btn btn-danger" onClick={(id, nome) => this.handleDelete(p.id, p.login)}>Deletar</button>
+                                    <button className="btn btn-success" onClick={(id) => this.handleEditar(p.id)}>Editar</button> &nbsp;
+                                    <button className="btn btn-danger" onClick={(id, nome) => this.handleDelete(p.id, p.login)}>Deletar</button>
                                 </td>
                             </tr>
                         )}

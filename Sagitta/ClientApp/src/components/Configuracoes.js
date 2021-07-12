@@ -30,7 +30,7 @@ export class Configuracoes extends Component {
 						</div>
 
 						<div id="divGrupoEspecial" className="cards" >
-							<a onClick={() => { window.location.href = "/grupoEspecial" }} className="linkAcesso">
+							<a onClick={() => { window.location.href = "/gruposCadastrados" }} className="linkAcesso">
 								<div className="area1">
 									<div className="">
 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-person-lines-fill icone" viewBox="0 0 16 16">
@@ -43,7 +43,7 @@ export class Configuracoes extends Component {
 						</div>
 
 						<div id="divUSER" className="cards" >
-							<a onClick={() => { window.location.href = "/novoUsuario" }} className="linkAcesso">
+							<a onClick={() => { window.location.href = "/admCadastrados" }} className="linkAcesso">
 								<div className="area1">
 									<div className="">
 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-file-person icone" viewBox="0 0 16 16">
