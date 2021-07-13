@@ -18,8 +18,11 @@ import { AdmCadastrados } from './components/AdmCadastrados';
 import { Finalizar } from './components/Finalizar';
 import { CidadesCadastradas } from './components/CidadesCadastradas';
 import { GruposCadastrados } from './components/GruposCadastrados';
+import { NovaCampanhaVacinacao } from './components/NovaCampanhaVacinacao';
+import { CampanhasCadastradas } from './components/CampanhasCadastradas';
 
 import './custom.css'
+
 
 
 export default class App extends Component {
@@ -53,6 +56,9 @@ export default class App extends Component {
                 <Route path='/admCadastrados' component={AdmCadastrados} />
                 <Route path='/gruposCadastrados' component={GruposCadastrados} />
                 <Route path='/gruposCadastrados/edit/:id' component={GruposCadastrados} />
+                <Route path='/novaCampanhaVacinacao' component={NovaCampanhaVacinacao} />
+                <Route path='/novaCampanhaVacinacao/edit/:id' component={NovaCampanhaVacinacao} />
+                <Route path='/campanhasCadastradas/' component={CampanhasCadastradas} />
 
             </Layout>
         );
