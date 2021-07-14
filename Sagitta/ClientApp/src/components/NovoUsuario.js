@@ -78,7 +78,6 @@ export class NovoUsuario extends Component {
 
         return (
             <div onLoad={this.validar()}>
-                <h1 style={{ color: "#fff" }}>{this.state.title}</h1>
                 {contents}
             </div>
         );
@@ -95,7 +94,7 @@ export class NovoUsuario extends Component {
         }
         return (
             <div>
-                <h3 className="espaco texto">+ NOVO USUÁRIO</h3>
+                <h3 className="espaco texto">+ {this.state.title} USUÁRIO</h3>
                 <form className="areaForm areaform2" onSubmit={this.handleSalve}>
                     {admNovo.map(p => (
                         <div className="areaCadastro">

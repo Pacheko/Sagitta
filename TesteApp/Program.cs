@@ -22,17 +22,17 @@ namespace TesteApp
             //    Console.WriteLine(item.GetInfo());
             //}
 
-            Console.WriteLine("\nPessoas Cadastradas, verificação:");
+            //Console.WriteLine("\nPessoas Cadastradas, verificação:");
 
-            var consulta = db.Pessoas
-                .Where(x => x.Id > 0)
-                .ToList();
+            //var consulta = db.Pessoas
+            //    .Where(x => x.Id > 0)
+            //    .ToList();
 
-            foreach (var item in consulta)
-            {
-                item.PodeVacinar(out string retorno);
-                Console.WriteLine($"{item.GetInfo()} {retorno}");
-            }
+            //foreach (var item in consulta)
+            //{
+            //    item.PodeVacinar(out string retorno);
+            //    Console.WriteLine($"{item.GetInfo()} {retorno}");
+            //}
 
 
 

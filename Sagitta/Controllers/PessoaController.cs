@@ -22,8 +22,10 @@ namespace Sagitta.Controllers
         public string Fone { get; set; }
         public string Email { get; set; }
         public string DataNascimento { get; set; }
+        public int CidadeId { get; set; }
         public string Cidade { get; set; }
         public string Estado { get; set; }
+        public int PrioridadeId { get; set; }
         public string Grupo { get; set; }
         public string Notificado { get; set; }
     }
@@ -37,66 +39,6 @@ namespace Sagitta.Controllers
         {
             using var db = new AppDbContext();
 
-
-            //foreach (var item in db.Cidades)
-            //{
-            //    db.Cidades.Remove(item);
-            //}
-            //db.SaveChanges();
-
-            //Cidade c1 = new Cidade()
-            //{
-            //    NmCidade = "Venâncio Aires",
-            //    NmUf = "Rio Grande do Sul",
-            //    SiglaUf = "RS"
-            //};
-            //Cidade c2 = new Cidade()
-            //{
-            //    NmCidade = "Santa Cruz do Sul",
-            //    NmUf = "Rio Grande do Sul",
-            //    SiglaUf = "RS"
-            //};
-            //Cidade c3 = new Cidade()
-            //{
-            //    NmCidade = "Montenegro",
-            //    NmUf = "Rio Grande do Sul",
-            //    SiglaUf = "RS"
-            //};
-
-            //db.Cidades.AddRange(c1, c2, c3);
-            //db.SaveChanges();
-
-            //Pessoa a = new Pessoa()
-            //{
-            //    CPF = "123",
-            //    Nome = "João",
-            //    DataNascimento = "12/03/1988",
-            //    Fone = "132456",
-            //    Email = "adsffas@fdsaf.com",
-            //    Idade = 55,
-            //    Sexo = "Masculino",
-            //    Telegram = "asdfw",
-            //    Cidade = c
-            //};
-            //Pessoa a = new Pessoa()
-            //{
-            //    CPF = "53425",
-            //    Nome = "Adão",
-            //    DataNascimento = "07/03/1989",
-            //    Fone = "132456",
-            //    Email = "adsffas@fdsaf.com",
-            //    Idade = 32,
-            //    Sexo = "Masculino",
-            //    Telegram = "asdfw",
-            //    Cidade = c
-            //};
-
-            //db.Cidades.Add(c);
-            //db.Pessoas.Add(a);
-
-            db.SaveChanges();
-
-
             var query =
                from pessoa in db.Pessoas
                from cidade in db.Cidades
@@ -112,8 +54,10 @@ namespace Sagitta.Controllers
                    Fone = pessoa.Fone,
                    Email = pessoa.Email,
                    DataNascimento = pessoa.DataNascimento,
+                   CidadeId = cidade.Id,
                    Cidade = cidade.NmCidade,
                    Estado = cidade.SiglaUf,
+                   PrioridadeId = prioridade.Id,
                    Grupo = prioridade.NmGrupo ?? "Sem Prioridade",
                    Notificado = pessoa.IsNotificado == true ? "Sim" : "Não"
                };
@@ -121,51 +65,23 @@ namespace Sagitta.Controllers
             return await query.ToListAsync();
         }
 
-        [HttpGet("{asdf}")]
-        public async Task<ActionResult<IEnumerable>> GetPessoasAptasVacina(string asdf)
+        [HttpGet("{aptasVacina}")]
+        public async Task<ActionResult<IEnumerable>> GetPessoasAptasVacina()
         {
             using var db = new AppDbContext();
 
-            //Cidade c = new Cidade()
-            //{
-            //    NmCidade = "Venâncio Aires",
-            //    NmUf = "Rio Grande do Sul",
-            //    SiglaUf = "RS"
-            //};
+            List<Pessoa> lstPessoa = new List<Pessoa>();
 
-            //Pessoa a = new Pessoa()
-            //{
-            //    CPF = "123",
-            //    Nome = "João",
-            //    DataNascimento = "12/03/1988",
-            //    Fone = "132456",
-            //    Email = "adsffas@fdsaf.com",
-            //    Idade = 55,
-            //    Sexo = "Masculino",
-            //    Telegram = "asdfw",
-            //    Cidade = c
-            //};
-            //Pessoa a = new Pessoa()
-            //{
-            //    CPF = "53425",
-            //    Nome = "Adão",
-            //    DataNascimento = "07/03/1989",
-            //    Fone = "132456",
-            //    Email = "adsffas@fdsaf.com",
-            //    Idade = 32,
-            //    Sexo = "Masculino",
-            //    Telegram = "asdfw",
-            //    Cidade = c
-            //};
-
-            //db.Cidades.Add(c);
-            //db.Pessoas.Add(a);
-
-            db.SaveChanges();
-
+            for (int i = 0; i < db.Pessoas.Count() - 1; i++)
+            {
+                if(db.Pessoas.ToList()[i].PodeVacinar())
+                {
+                    lstPessoa.Add(db.Pessoas.ToList()[i]);
+                }
+            }
 
             var query =
-               from pessoa in db.Pessoas
+               from pessoa in lstPessoa
                from cidade in db.Cidades
                .Where(x => x.Id == pessoa.CidadeId)
                from prioridade in db.Prioridades
@@ -179,21 +95,16 @@ namespace Sagitta.Controllers
                    Fone = pessoa.Fone,
                    Email = pessoa.Email,
                    DataNascimento = pessoa.DataNascimento,
+                   CidadeId = cidade.Id,
                    Cidade = cidade.NmCidade,
                    Estado = cidade.SiglaUf,
+                   PrioridadeId = prioridade.Id,
                    Grupo = prioridade.NmGrupo ?? "Sem Prioridade",
                    Notificado = pessoa.IsNotificado == true ? "Sim" : "Não"
                };
 
-            return await query.ToListAsync();
-        }
 
-        [HttpGet("{vacinadas}")]
-        public IEnumerable<Pessoa> GetPessoasVacinadas(string vacinadas)
-        {
-            using var db = new AppDbContext();
-
-            return db.Pessoas.Where(x => x.Id == 1).ToList();
+            return query.ToList();
         }
 
         [HttpPost]

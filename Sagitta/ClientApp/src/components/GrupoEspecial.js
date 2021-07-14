@@ -43,7 +43,7 @@ export class GrupoEspecial extends Component {
         }
         else {
 
-            this.state = { title: "CRIAR", novoGrupo: [""], loading: false };
+            this.state = { title: "NOVO", novoGrupo: [""], loading: false };
         }
     }
 
@@ -72,7 +72,6 @@ export class GrupoEspecial extends Component {
 
         return (
             <div>
-                <h1 style={{ color: "#fff" }}>{this.state.title}</h1>
                 {contents}
             </div>
         );
@@ -89,7 +88,7 @@ export class GrupoEspecial extends Component {
         }
         return (
             <div>
-                <h3 className="espaco texto">+ NOVO GRUPO ESPECIAL</h3>
+                <h3 className="espaco texto">+ {this.state.title} GRUPO ESPECIAL</h3>
                 <form className="areaForm areaform2" onSubmit={this.handleSalve}>
                     {novoGrupo.map(p => (
                         <div className="areaCadastro">

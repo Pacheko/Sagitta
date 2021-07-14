@@ -43,7 +43,7 @@ export class NovaVacina extends Component {
         }
         else {
             
-            this.state = { title: "CRIAR", vacinaTipo: [""], loading: false };
+            this.state = { title: "NOVO", vacinaTipo: [""], loading: false };
         }
     }
 
@@ -72,7 +72,6 @@ export class NovaVacina extends Component {
 
         return (
             <div>
-                <h1 style={{ color: "#fff" }}>{this.state.title}</h1>
                 {contents}
             </div>
         );
@@ -89,7 +88,7 @@ export class NovaVacina extends Component {
         }
         return (
             <div>
-            <h3 className="espaco texto">+ NOVO TIPO DE VACINA</h3>
+                <h3 className="espaco texto">+ {this.state.title} TIPO DE VACINA</h3>
                 <form className="areaForm areaform2" onSubmit={this.handleSalve}>
                 {vacinaTipo.map(p => (
                     <div className="areaCadastro">

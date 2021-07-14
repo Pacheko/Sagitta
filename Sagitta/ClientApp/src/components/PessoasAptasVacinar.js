@@ -74,7 +74,7 @@ export class PessoasAptasVacinar extends Component {
     }
 
     async popularPessoas() {
-        const response = await fetch('pessoa');
+        const response = await fetch('api/pessoa/aptasVacina');
         const data = await response.json();
         this.setState({ pessoas: data, loading: false });
     }

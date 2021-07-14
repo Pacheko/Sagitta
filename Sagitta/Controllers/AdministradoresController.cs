@@ -104,17 +104,13 @@ namespace Sagitta.Controllers
         [HttpPost("{login}")]
         public async Task<ActionResult<IEnumerable>> CarregarLoginAsync([FromForm] Administrador adm)
         {
-
             using var db = new AppDbContext();
-         
             return await db.Administradores.Where(x => x.Login == adm.Login & x.Senha == adm.Senha).ToArrayAsync();
-
         }
 
         private bool AdmExists(int id)
         {
             using var db = new AppDbContext();
-
             return db.Administradores.Any(e => e.Id == id);
         }
     }

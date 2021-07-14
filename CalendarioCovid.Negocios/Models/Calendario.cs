@@ -15,16 +15,5 @@ namespace CalendarioCovid.Negocios.Models
         public Cidade Cidade { get; set; }
         public int TipoVacinaId { get; set; }
         public TipoVacina TipoVacina { get; set; }
-
-
-        public Calendario() { }
-
-        public string GetInfo()
-        {
-            //  string aux = ExigenciaComorbidade ? "Com Comorbidades" : "Sem Comorbidades";
-
-            //  return $"{Id} - {DataInicial.ToShortDateString()} - {Evento} - {IdadeMinima} - {aux}";
-            return string.Empty;
-        }
     }
 }

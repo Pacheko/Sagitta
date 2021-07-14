@@ -49,7 +49,7 @@ export class NovaCampanhaVacinacao extends Component {
         }
         else {
 
-            this.state = { title: "CRIAR", novaCampanha: [""], loading: false };
+            this.state = { title: "NOVA", novaCampanha: [""], loading: false };
         }
     }
 
@@ -78,7 +78,6 @@ export class NovaCampanhaVacinacao extends Component {
 
         return (
             <div>
-                <h1 style={{ color: "#fff" }}>{this.state.title}</h1>
                 {contents}
             </div>
         );
@@ -95,7 +94,7 @@ export class NovaCampanhaVacinacao extends Component {
         }
         return (
             <div>
-                <h3 className="espaco texto">+ NOVA CAMPANHA DE VACINAÇÃO</h3>
+                <h3 className="espaco texto">+ {this.state.title} CAMPANHA DE VACINAÇÃO</h3>
                 <form className="areaForm areaform2" onSubmit={this.handleSalve}>
                     {novaCampanha.map(p => (
                         <div className="areaCadastro">
@@ -104,7 +103,7 @@ export class NovaCampanhaVacinacao extends Component {
                             <div className="form-group">
                                 <div className="form-group col-md-6">
                                     <label for="dataInicial">DATA INICIAL</label>
-                                    <input type="date" className="form-control" name="dataInicial" value={p.dataInicial} id="dataInicial" />
+                                    <input type="date" className="form-control" name="dataInicial" value={p.dataInicial} defaultValue={p.dataInicial} id="dataInicial" />
                                 </div>
                                 <div className="form-group col-md-6">
                                     <label for="idadeMinima">IDADE MINIMA</label>

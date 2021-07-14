@@ -46,21 +46,23 @@ namespace CalendarioCovid.Negocios.Models
         //    }
         //}
 
-        public bool PodeVacinar(out string retorno)
+        public bool PodeVacinar()
         {
             using (var database = new AppDbContext())
             {
-                //var calendario = database.CalendarioVacinacao.FirstOrDefault(x => x.ExigenciaComorbidade == TemComorbidade && x.IdadeMinima < Idade && x.DataInicial <= DateTime.Now);
-                var calendario = database.CalendarioVacinacao.FirstOrDefault(x => x.IdadeMinima < Idade && x.DataInicial <= DateTime.Now);
+                var calendario = database.CalendarioVacinacao.FirstOrDefault(x => 
+                x.IdadeMinima < Idade && 
+                x.DataInicial.Date <= DateTime.Now.Date &&
+                x.CidadeId == CidadeId &&
+                x.PrioridadeId == PrioridadeId                
+                );
 
                 if (calendario != null)
                 {
-                    retorno = $"Pode se vacinar pela campanha:  data de inicio: {calendario.DataInicial.ToShortDateString()}";
                     return true;
                 }
                 else
                 {
-                    retorno = "Não pode se vacinar";
                     return false;
                 }
             }
@@ -93,11 +95,5 @@ namespace CalendarioCovid.Negocios.Models
                 }
             }
         }
-
-
-        //public string PrintUsuario()
-        //{
-        //    return $"Login: {Usuario.Login} Senha: {Usuario.Senha}";
-        //}
     }
 }
