@@ -20,6 +20,7 @@ namespace CalendarioCovid.Negocios.Models
         public Cidade Cidade { get; set; }
         public int? PrioridadeId { get; set; }
         public Prioridade? Prioridade { get; set; }
+        public bool SolicitaEmail { get; set; }
         public bool IsNotificado { get; set; }
 
         public Pessoa() { }
