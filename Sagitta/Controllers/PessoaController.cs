@@ -65,47 +65,83 @@ namespace Sagitta.Controllers
             return await query.ToListAsync();
         }
 
-        [HttpGet("{aptasVacina}")]
-        public async Task<ActionResult<IEnumerable>> GetPessoasAptasVacina()
+        [HttpGet("{id}")]
+        public async Task<ActionResult<IEnumerable>> CarregarPessoaAsync(int id)
         {
+
             using var db = new AppDbContext();
 
-            List<Pessoa> lstPessoa = new List<Pessoa>();
+            var pessoa2 = await db.Pessoas.FindAsync(id);
 
-            for (int i = 0; i < db.Pessoas.Count() - 1; i++)
+            if (pessoa2 == null)
             {
-                if(db.Pessoas.ToList()[i].PodeVacinar())
-                {
-                    lstPessoa.Add(db.Pessoas.ToList()[i]);
-                }
+                return NotFound();
             }
 
-            var query =
-               from pessoa in lstPessoa
-               from cidade in db.Cidades
-               .Where(x => x.Id == pessoa.CidadeId)
-               from prioridade in db.Prioridades
-               .Where(prioridade => (prioridade.Id == pessoa.PrioridadeId || prioridade == null)).DefaultIfEmpty()
-               select new retorno()
-               {
-                   Nome = pessoa.Nome,
-                   CPF = pessoa.CPF,
-                   Idade = pessoa.Idade,
-                   Sexo = pessoa.Sexo,
-                   Fone = pessoa.Fone,
-                   Email = pessoa.Email,
-                   DataNascimento = pessoa.DataNascimento,
-                   CidadeId = cidade.Id,
-                   Cidade = cidade.NmCidade,
-                   Estado = cidade.SiglaUf,
-                   PrioridadeId = prioridade.Id,
-                   Grupo = prioridade.NmGrupo ?? "Sem Prioridade",
-                   Notificado = pessoa.IsNotificado == true ? "Sim" : "Não"
-               };
+            var pessoaRegistro = from pessoa in db.Pessoas
+                                 join prioridade in db.Prioridades on pessoa.PrioridadeId equals prioridade.Id
+                                 join calendario in db.CalendarioVacinacao on prioridade.Id equals calendario.PrioridadeId
+                                 where pessoa.Id == id
+                                 
+                                 select new
+                                  {
+                                      pessoa.Id,
+                                      pessoa.Nome,
+                                      pessoa.Idade,
+                                      calendario.IdadeMinima,
+                                      DataInicial = calendario.DataInicial.ToString("dd/MM/yyyy"),
+                                      DataHoje = DateTime.Now.ToString("dd/MM/yyyy"),
+                                      DataInicialCompleta = calendario.DataInicial,
+                                      DataHojeCompleta = DateTime.Now
+                                 };
 
+            return await pessoaRegistro.ToListAsync();
 
-            return query.ToList();
         }
+
+        //[HttpGet("{aptasVacina}")]
+        //public async Task<ActionResult<IEnumerable>> GetPessoasAptasVacina()
+        //{
+        //    using var db = new AppDbContext();
+
+        //    List<Pessoa> lstPessoa = new List<Pessoa>();
+
+        //    for (int i = 0; i < db.Pessoas.Count() - 1; i++)
+        //    {
+        //        if(db.Pessoas.ToList()[i].PodeVacinar())
+        //        {
+        //            lstPessoa.Add(db.Pessoas.ToList()[i]);
+        //        }
+        //    }
+
+        //    var query =
+        //       from pessoa in lstPessoa
+        //       from cidade in db.Cidades
+        //       .Where(x => x.Id == pessoa.CidadeId)
+        //       from prioridade in db.Prioridades
+        //       .Where(prioridade => (prioridade.Id == pessoa.PrioridadeId || prioridade == null)).DefaultIfEmpty()
+        //       select new retorno()
+        //       {
+        //           Nome = pessoa.Nome,
+        //           CPF = pessoa.CPF,
+        //           Idade = pessoa.Idade,
+        //           Sexo = pessoa.Sexo,
+        //           Fone = pessoa.Fone,
+        //           Email = pessoa.Email,
+        //           DataNascimento = pessoa.DataNascimento,
+        //           CidadeId = cidade.Id,
+        //           Cidade = cidade.NmCidade,
+        //           Estado = cidade.SiglaUf,
+        //           PrioridadeId = prioridade.Id,
+        //           Grupo = prioridade.NmGrupo ?? "Sem Prioridade",
+        //           Notificado = pessoa.IsNotificado == true ? "Sim" : "Não"
+        //       };
+
+
+        //    return query.ToList();
+        //}
+
+        
 
         [HttpPost]
         public async void PostNovoCadastro([FromForm] Pessoa pessoa)
@@ -116,7 +152,7 @@ namespace Sagitta.Controllers
 
             if (pessoa.PrioridadeId == semPrioridade.Id)
             {
-                pessoa.PrioridadeId = null;
+                pessoa.PrioridadeId = 1;
             }
 
             db.Pessoas.Add(pessoa);

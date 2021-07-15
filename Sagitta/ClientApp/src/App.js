@@ -36,6 +36,7 @@ export default class App extends Component {
                 <Route exact path='/' component={Home} />
                 <Route path='/cadastro' component={Cadastro} />
                 <Route path='/confirmacao' component={Confirmacao} />
+                <Route path='/confirmacao/pessoa/:id' component={Confirmacao} />
                 <Route path='/finalizar' component={Finalizar} />
 
                 {/*SISTEMA*/}
