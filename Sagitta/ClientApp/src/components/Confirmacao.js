@@ -18,6 +18,7 @@ export class Pessoa {
         this.nome = "";
         this.idade = "";
         this.idadeMinima = "";
+        this.email = "";
         this.dataInicial = "";
         this.dataHoje = "";
         this.dataInicialCompleta = "";
@@ -63,6 +64,26 @@ export class Confirmacao extends Component {
         );
     }
 
+    static handleEdit(id, email) {
+        fetch('api/pessoa/' + id, { method: 'PUT' })
+            .then(json => {
+
+                Swal.fire({
+                    title: 'TUDO PRONTO',
+                    text: "VOÇÊ RECEBERÁ UM EMAIL EM: " + email + " QUANDO CHEGAR SUA VEZ!",
+                    icon: 'success',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/";
+                    }
+                })
+
+            });
+
+    }
+
     renderCreateForm() {
         const { pessoaget } = this.state;
         const getID = new GetURL;
@@ -82,6 +103,7 @@ export class Confirmacao extends Component {
                                     
                                     {(p.idadeMinima < p.idade & p.dataInicialCompleta < p.dataHojeCompleta ?
                                         <div>
+                                            <div style={{ display: "none" }}>{p.email}</div>
                                             <h2 className="espaco paTop">{p.nome} VOÇÊ JÁ PODE SE VACINAR</h2>
                                             <h2 className="espaco paTop">SEU DIA É HOJE</h2>
                                         </div>
@@ -92,13 +114,13 @@ export class Confirmacao extends Component {
                                                     <h2 className="espaco paTop">SEU DIA É {p.dataInicial}</h2>
                                                     <h4 className="espaco">GOSTARIA DE RECEBER UM E-MAIL LEMBRANDO O DIA? </h4>
                                                     <a id="nao" className="btn btn-danger botao2" onClick={() => { window.location.href = "/" }}>NÃO</a>
-                                                    <button id="sim" className="btn btn-success botao2">SIM</button>
+                                                    <button id="sim" className="btn btn-success botao2" onClick={(id) => this.handleDelete(p.id, p.nmVacina)}>SIM</button>
                                                 </div>
                                                 : <div>
                                                     <h2 className="espaco paTop">FIQUE TRANQUILO SEU DIA ESTÁ PERTO</h2>
                                                     <h4 className="espaco">GOSTARIA DE RECEBER UM E-MAIL LEMBRANDO O DIA? </h4>
                                                     <a id="nao" className="btn btn-danger botao2" onClick={() => { window.location.href = "/" }}>NÃO</a>
-                                                    <button id="sim" className="btn btn-success botao2">SIM</button>
+                                                    <button id="sim" className="btn btn-success botao2" onClick={(id, email) => this.handleEdit(p.id, p.email)}>SIM</button>
                                                 </div>
                                             )}
                                             

@@ -88,6 +88,7 @@ namespace Sagitta.Controllers
                                       pessoa.Id,
                                       pessoa.Nome,
                                       pessoa.Idade,
+                                      pessoa.Email,
                                       calendario.IdadeMinima,
                                       DataInicial = calendario.DataInicial.ToString("dd/MM/yyyy"),
                                       DataHoje = DateTime.Now.ToString("dd/MM/yyyy"),
@@ -141,10 +142,57 @@ namespace Sagitta.Controllers
         //    return query.ToList();
         //}
 
-        
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> EditarVacina(int id)
+        //{
+        //    if (id != vacina.Id)
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //    using var db = new AppDbContext();
+
+        //    db.Entry(vacina).State = EntityState.Modified;
+
+        //    try
+        //    {
+        //        await db.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!VacinaExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
+
+        //    return NoContent();
+        //}
+
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> DeleteVacina(int id)
+        //{
+        //    using var db = new AppDbContext();
+
+        //    var vacina = await db.TipoVacinas.FindAsync(id);
+        //    if (vacina == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    db.TipoVacinas.Remove(vacina);
+        //    await db.SaveChangesAsync();
+
+        //    return NoContent();
+        //}
+
 
         [HttpPost]
-        public async void PostNovoCadastro([FromForm] Pessoa pessoa)
+        public async Task<ActionResult<IEnumerable>> PostNovoCadastro([FromForm] Pessoa pessoa)
         {
             using var db = new AppDbContext();
 
@@ -157,6 +205,19 @@ namespace Sagitta.Controllers
 
             db.Pessoas.Add(pessoa);
             db.SaveChanges();
+
+            var pessoaRegistro = from pessoas in db.Pessoas                                
+                                 where pessoas.Id == pessoa.Id
+
+                                 select new
+                                 {
+                                     pessoas.Id,
+                                     pessoas.Nome,
+                                     pessoas.Idade                                  
+                                 };
+
+            return await pessoaRegistro.ToListAsync();
+
         }
     }
 }

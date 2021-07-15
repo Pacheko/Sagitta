@@ -42,17 +42,6 @@ export class VacinasCadastradas extends Component {
             }
         })
 
-
-        //if (!window.confirm("Você deseja deletar a vacina : " + nome + "?")) {
-        //    return;
-        //}
-        //else {
-        //    fetch('api/tiposvacina/' + id, { method: 'delete' })
-        //        .then(json => {
-        //            Swal.fire('Deletado com Sucesso!', '', 'success');      
-        //            window.location.href = "vacinascadastradas";
-        //        })
-        //}
     }
 
     static renderTabela(tiposVacina) {
