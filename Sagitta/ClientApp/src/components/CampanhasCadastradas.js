@@ -51,7 +51,7 @@ export class CampanhasCadastradas extends Component {
                             <th>Grupo Especial</th>
                             <th>Cidade</th>
                             <th>Vacina</th>                           
-                            <th>Ações</th>
+                            <th>Deletar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -63,7 +63,7 @@ export class CampanhasCadastradas extends Component {
                                 <td>{p.cidadeId}</td>
                                 <td>{p.tipoVacinaId}</td>
                                 <td>
-                                    <button className="btn btn-success" onClick={(id) => { window.location.href = "/novaCampanhaVacinacao/edit?id=" + p.id }}>Editar</button> &nbsp;
+                                    {/*<button className="btn btn-success" onClick={(id) => { window.location.href = "/novaCampanhaVacinacao/edit?id=" + p.id }}>Editar</button> &nbsp;*/}
                                 <button className="btn btn-danger" onClick={(id, nome) => this.handleDelete(p.id, p.idadeMinima)}>Deletar</button>
                                 </td>
                             </tr>

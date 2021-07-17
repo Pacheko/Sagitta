@@ -45,7 +45,7 @@ export class Sistema extends Component {
 					</div>
 
 					<div id="divpessoasnaoaptas" className="cards" >
-						<a onClick={() => { window.location.href = "/pessoascadastradas" }} className="linkAcesso">
+							<a onClick={() => { window.location.href = "/pessoasNaoAptasVacinar" }} className="linkAcesso">
 							<div className="area1">
 									<div className="">
 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-person-x icone" viewBox="0 0 16 16">

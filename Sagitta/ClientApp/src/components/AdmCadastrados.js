@@ -20,7 +20,7 @@ export class AdmCadastrados extends Component {
     }
 
     static handleEditar(id) {
-        if (id == 2) {
+        if (id == 1) {
             Swal.fire('Não é possivel editar o usuário Master!')
         } else {
             window.location.href = "/novoUsuario/edit?id=" + id
@@ -28,7 +28,7 @@ export class AdmCadastrados extends Component {
     }
 
     static handleDelete(id, nome) {
-        if (id == 2) {
+        if (id == 1) {
             Swal.fire('Não é possivel deletar o usuário Master!')
         } else {
             Swal.fire({

@@ -20,6 +20,7 @@ import { CidadesCadastradas } from './components/CidadesCadastradas';
 import { GruposCadastrados } from './components/GruposCadastrados';
 import { NovaCampanhaVacinacao } from './components/NovaCampanhaVacinacao';
 import { CampanhasCadastradas } from './components/CampanhasCadastradas';
+import { PessoasNaoAptasVacinar } from './components/PessoasNaoAptasVacinar';
 
 import './custom.css'
 
@@ -60,6 +61,7 @@ export default class App extends Component {
                 <Route path='/novaCampanhaVacinacao' component={NovaCampanhaVacinacao} />
                 <Route path='/novaCampanhaVacinacao/edit/:id' component={NovaCampanhaVacinacao} />
                 <Route path='/campanhasCadastradas/' component={CampanhasCadastradas} />
+                <Route path='/pessoasNaoAptasVacinar/' component={PessoasNaoAptasVacinar} />
 
             </Layout>
         );

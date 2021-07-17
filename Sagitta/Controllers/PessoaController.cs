@@ -12,6 +12,23 @@ using System.Threading.Tasks;
 
 namespace Sagitta.Controllers
 {
+
+    public class retorno1
+    {
+        public int IdadeMinima { get; set; }      
+    }
+
+    public class retorno2
+    {
+        public int IdadeMinima { get; set; }
+        public bool Comorbidade { get; set; }
+    }
+
+    public class retorno3
+    {
+        public int IdadeMinima { get; set; }
+    }
+
     public class retorno
     {
         public int Id { get; set; }
@@ -62,6 +79,13 @@ namespace Sagitta.Controllers
                    Notificado = pessoa.IsNotificado == true ? "Sim" : "Não"
                };
 
+            var teste = new retorno();
+
+            if (teste.CidadeId == 4)
+            {
+
+            }
+
             return await query.ToListAsync();
         }
 
@@ -78,119 +102,222 @@ namespace Sagitta.Controllers
                 return NotFound();
             }
 
-            var pessoaRegistro = from pessoa in db.Pessoas
+            
+            
+
+            var registropessoa = from pessoa in db.Pessoas
                                  join prioridade in db.Prioridades on pessoa.PrioridadeId equals prioridade.Id
                                  join calendario in db.CalendarioVacinacao on prioridade.Id equals calendario.PrioridadeId
-                                 where pessoa.Id == id
-                                 
                                  select new
-                                  {
-                                      pessoa.Id,
-                                      pessoa.Nome,
-                                      pessoa.Idade,
-                                      pessoa.Email,
-                                      calendario.IdadeMinima,
-                                      DataInicial = calendario.DataInicial.ToString("dd/MM/yyyy"),
-                                      DataHoje = DateTime.Now.ToString("dd/MM/yyyy"),
-                                      DataInicialCompleta = calendario.DataInicial,
-                                      DataHojeCompleta = DateTime.Now
+                                 {
+                                     pessoa.Id,
+                                     pessoa.Nome,
+                                     pessoa.Idade,
+                                     pessoa.Email,
+                                     calendario.IdadeMinima,
+                                     DataInicial = calendario.DataInicial.ToString("dd/MM/yyyy"),
+                                     DataHoje = DateTime.Now.ToString("dd/MM/yyyy"),
+                                     DataInicialCompleta = calendario.DataInicial,
+                                     DataHojeCompleta = DateTime.Now
                                  };
 
-            return await pessoaRegistro.ToListAsync();
+            var pessoaRegistro2 = from calendario in db.CalendarioVacinacao
+                                  join prioridade in db.Prioridades on calendario.PrioridadeId equals prioridade.Id
+                                  where prioridade.IsComorbidade == false
+                                  orderby calendario.IdadeMinima ascending
 
+                                  select new
+                                 {
+                                     IdadeMinima = calendario.IdadeMinima                                  
+                                 };
+
+            var pessoaRegistro4 = from calendario in db.CalendarioVacinacao
+                                  join prioridade in db.Prioridades on calendario.PrioridadeId equals prioridade.Id
+                                  join pessoa in db.Pessoas on prioridade.Id equals pessoa.PrioridadeId
+                                  where pessoa.Id == id
+                                  orderby calendario.IdadeMinima ascending
+
+                                  select new retorno3()
+                                  {
+                                      IdadeMinima = calendario.IdadeMinima
+                                  };
+
+            
+
+            var pessoaRegistro3 = from pessoa in db.Pessoas
+                                  join prioridade in db.Prioridades on pessoa.PrioridadeId equals prioridade.Id
+                                  join calendario in db.CalendarioVacinacao on prioridade.Id equals calendario.PrioridadeId
+                                  where pessoa.Id == id
+
+                                  select new retorno2()
+                                  {                                    
+                                      Comorbidade = prioridade.IsComorbidade
+                                  };
+
+
+            var query1 = pessoaRegistro2.First();
+            var query2 = pessoaRegistro3.First();
+            var query3 = pessoaRegistro4.First();
+                     
+
+            if (query3.IdadeMinima != 0)
+            {
+                if (query2.Comorbidade == true && query3.IdadeMinima > query1.IdadeMinima && query1.IdadeMinima != 0)
+                {
+                        registropessoa = from pessoa in db.Pessoas
+                                          .Where(x => x.Id == id)
+                                          from calendario in db.CalendarioVacinacao
+                                          join prioridade in db.Prioridades on calendario.PrioridadeId equals prioridade.Id
+                                          where prioridade.IsComorbidade == false & calendario.IdadeMinima == (db.CalendarioVacinacao.Where(r => 1 == 1).Min(c => c.IdadeMinima))
+
+                                          select new
+                                          {
+                                              pessoa.Id,
+                                              pessoa.Nome,
+                                              pessoa.Idade,
+                                              pessoa.Email,
+                                              calendario.IdadeMinima,
+                                              DataInicial = calendario.DataInicial.ToString("dd/MM/yyyy"),
+                                              DataHoje = DateTime.Now.ToString("dd/MM/yyyy"),
+                                              DataInicialCompleta = calendario.DataInicial,
+                                              DataHojeCompleta = DateTime.Now
+                                          };
+
+                    return await registropessoa.ToListAsync();
+
+                }
+                else if (query2.Comorbidade == false && query3.IdadeMinima > query1.IdadeMinima && query1.IdadeMinima != 0)
+                {
+                        registropessoa = from pessoa in db.Pessoas
+                                          .Where(x => x.Id == id)
+                                          from calendario in db.CalendarioVacinacao
+                                          join prioridade in db.Prioridades on calendario.PrioridadeId equals prioridade.Id
+                                          where prioridade.IsComorbidade == false & calendario.IdadeMinima == (db.CalendarioVacinacao.Where(r => 1 == 1).Min(c => c.IdadeMinima))
+
+                                          select new
+                                          {
+                                              pessoa.Id,
+                                              pessoa.Nome,
+                                              pessoa.Idade,
+                                              pessoa.Email,
+                                              calendario.IdadeMinima,
+                                              DataInicial = calendario.DataInicial.ToString("dd/MM/yyyy"),
+                                              DataHoje = DateTime.Now.ToString("dd/MM/yyyy"),
+                                              DataInicialCompleta = calendario.DataInicial,
+                                              DataHojeCompleta = DateTime.Now
+                                          };
+
+                    return await registropessoa.ToListAsync();
+                }
+                else if (query2.Comorbidade == true && query3.IdadeMinima <= query1.IdadeMinima && query1.IdadeMinima != 0)
+                {
+                        registropessoa = from pessoa in db.Pessoas
+                                         join prioridade in db.Prioridades on pessoa.PrioridadeId equals prioridade.Id
+                                         join calendario in db.CalendarioVacinacao on prioridade.Id equals calendario.PrioridadeId
+                                         where pessoa.Id == id & calendario.IdadeMinima == (query3.IdadeMinima)
+                                       
+
+                                         select new
+                                         {
+                                             pessoa.Id,
+                                             pessoa.Nome,
+                                             pessoa.Idade,
+                                             pessoa.Email,
+                                             calendario.IdadeMinima,
+                                             DataInicial = calendario.DataInicial.ToString("dd/MM/yyyy"),
+                                             DataHoje = DateTime.Now.ToString("dd/MM/yyyy"),
+                                             DataInicialCompleta = calendario.DataInicial,
+                                             DataHojeCompleta = DateTime.Now
+                                         };
+
+                    return await registropessoa.ToListAsync();
+
+                }
+                else if (query2.Comorbidade == false && query3.IdadeMinima <= query1.IdadeMinima && query1.IdadeMinima != 0)
+                {
+                        registropessoa = from pessoa in db.Pessoas
+                                         join prioridade in db.Prioridades on pessoa.PrioridadeId equals prioridade.Id
+                                         join calendario in db.CalendarioVacinacao on prioridade.Id equals calendario.PrioridadeId
+                                         where pessoa.Id == id & calendario.IdadeMinima == (query3.IdadeMinima)
+
+                                         select new
+                                         {
+                                             pessoa.Id,
+                                             pessoa.Nome,
+                                             pessoa.Idade,
+                                             pessoa.Email,
+                                             calendario.IdadeMinima,
+                                             DataInicial = calendario.DataInicial.ToString("dd/MM/yyyy"),
+                                             DataHoje = DateTime.Now.ToString("dd/MM/yyyy"),
+                                             DataInicialCompleta = calendario.DataInicial,
+                                             DataHojeCompleta = DateTime.Now
+                                         };
+
+                    return await registropessoa.ToListAsync();
+                } else
+                {
+                    registropessoa = from pessoa in db.Pessoas
+                                          .Where(x => x.Id == id)
+                                     from calendario in db.CalendarioVacinacao
+                                     join prioridade in db.Prioridades on calendario.PrioridadeId equals prioridade.Id
+                                     where prioridade.IsComorbidade == false & calendario.IdadeMinima == (db.CalendarioVacinacao.Where(r => 1 == 1).Min(c => c.IdadeMinima))
+
+                                     select new
+                                     {
+                                         pessoa.Id,
+                                         pessoa.Nome,
+                                         pessoa.Idade,
+                                         pessoa.Email,
+                                         IdadeMinima = 200,
+                                         DataInicial = DateTime.Now.AddDays(5).ToString("dd/MM/yyyy"),
+                                         DataHoje = DateTime.Now.ToString("dd/MM/yyyy"),
+                                         DataInicialCompleta = DateTime.Now.AddDays(5),
+                                         DataHojeCompleta = DateTime.Now
+                                     };
+
+                    return await registropessoa.ToListAsync();
+                }
+
+            } else
+            {
+                    registropessoa = from pessoa in db.Pessoas
+                                          .Where(x => x.Id == id)
+                                      from calendario in db.CalendarioVacinacao
+                                      join prioridade in db.Prioridades on calendario.PrioridadeId equals prioridade.Id
+                                      where prioridade.IsComorbidade == false & calendario.IdadeMinima == (db.CalendarioVacinacao.Where(r => 1 == 1).Min(c => c.IdadeMinima))
+
+                                      select new
+                                      {
+                                          pessoa.Id,
+                                          pessoa.Nome,
+                                          pessoa.Idade,
+                                          pessoa.Email,
+                                          IdadeMinima = 200,
+                                          DataInicial = DateTime.Now.AddDays(5).ToString("dd/MM/yyyy"),
+                                          DataHoje = DateTime.Now.ToString("dd/MM/yyyy"),
+                                          DataInicialCompleta = DateTime.Now.AddDays(5),
+                                          DataHojeCompleta = DateTime.Now
+                                      };
+
+                return await registropessoa.ToListAsync();
+            }
+                return await registropessoa.ToListAsync(); 
         }
 
-        //[HttpGet("{aptasVacina}")]
-        //public async Task<ActionResult<IEnumerable>> GetPessoasAptasVacina()
-        //{
-        //    using var db = new AppDbContext();
+        [HttpPut("{id}")]
+        public async Task<IActionResult> EnviaEmail(int id)
+        {
+            using var db = new AppDbContext();
 
-        //    List<Pessoa> lstPessoa = new List<Pessoa>();
+            Pessoa enviaremail = db.Pessoas.First(p => p.Id == id);
 
-        //    for (int i = 0; i < db.Pessoas.Count() - 1; i++)
-        //    {
-        //        if(db.Pessoas.ToList()[i].PodeVacinar())
-        //        {
-        //            lstPessoa.Add(db.Pessoas.ToList()[i]);
-        //        }
-        //    }
+            enviaremail.SolicitaEmail = true;
 
-        //    var query =
-        //       from pessoa in lstPessoa
-        //       from cidade in db.Cidades
-        //       .Where(x => x.Id == pessoa.CidadeId)
-        //       from prioridade in db.Prioridades
-        //       .Where(prioridade => (prioridade.Id == pessoa.PrioridadeId || prioridade == null)).DefaultIfEmpty()
-        //       select new retorno()
-        //       {
-        //           Nome = pessoa.Nome,
-        //           CPF = pessoa.CPF,
-        //           Idade = pessoa.Idade,
-        //           Sexo = pessoa.Sexo,
-        //           Fone = pessoa.Fone,
-        //           Email = pessoa.Email,
-        //           DataNascimento = pessoa.DataNascimento,
-        //           CidadeId = cidade.Id,
-        //           Cidade = cidade.NmCidade,
-        //           Estado = cidade.SiglaUf,
-        //           PrioridadeId = prioridade.Id,
-        //           Grupo = prioridade.NmGrupo ?? "Sem Prioridade",
-        //           Notificado = pessoa.IsNotificado == true ? "Sim" : "Não"
-        //       };
+            await db.SaveChangesAsync();
 
-
-        //    return query.ToList();
-        //}
-
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> EditarVacina(int id)
-        //{
-        //    if (id != vacina.Id)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    using var db = new AppDbContext();
-
-        //    db.Entry(vacina).State = EntityState.Modified;
-
-        //    try
-        //    {
-        //        await db.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!VacinaExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return NoContent();
-        //}
-
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteVacina(int id)
-        //{
-        //    using var db = new AppDbContext();
-
-        //    var vacina = await db.TipoVacinas.FindAsync(id);
-        //    if (vacina == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    db.TipoVacinas.Remove(vacina);
-        //    await db.SaveChangesAsync();
-
-        //    return NoContent();
-        //}
-
-
+            return NoContent();
+        }
+      
         [HttpPost]
         public async Task<ActionResult<IEnumerable>> PostNovoCadastro([FromForm] Pessoa pessoa)
         {

@@ -24,33 +24,21 @@ export class PessoasAptasVacinar extends Component {
             <table className='table table-striped' aria-labelledby="tabelLabel">
                 <thead>
                     <tr>
-                        <th>Nome</th>
-                        <th>Cpf</th>
-                        <th>Idade</th>
-                        <th>Sexo</th>
-                        <th>Fone</th>
-                        <th>Email</th>
-                        <th>Data Nascimento</th>
+                        <th>Nome</th>                     
+                        <th>Idade</th>                       
+                        <th>Email</th>                       
                         <th>Cidade</th>
-                        <th>Estado</th>
-                        <th>Grupo Prioritario</th>
-                        <th>Foi Notificado?</th>
+                        <th>Estado</th>                       
                     </tr>
                 </thead>
                 <tbody>
                     {pessoas.map(p =>
                         <tr key={p.id}>
                             <td>{p.nome}</td>
-                            <td>{p.cpf}</td>
                             <td>{p.idade}</td>
-                            <td>{p.sexo}</td>
-                            <td>{p.fone}</td>
                             <td>{p.email}</td>
-                            <td>{p.dataNascimento}</td>
                             <td>{p.cidade}</td>
-                            <td>{p.estado}</td>
-                            <td>{p.grupo}</td>
-                            <td>{p.notificado}</td>
+                            <td>{p.estado}</td>                            
                         </tr>
                     )}
                 </tbody>
@@ -74,7 +62,7 @@ export class PessoasAptasVacinar extends Component {
     }
 
     async popularPessoas() {
-        const response = await fetch('api/pessoa/aptasVacina');
+        const response = await fetch('api/pessoasaptas');
         const data = await response.json();
         this.setState({ pessoas: data, loading: false });
     }
