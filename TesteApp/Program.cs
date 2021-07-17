@@ -10,69 +10,12 @@ namespace TesteApp
     {
         static void Main(string[] args)
         {
+            CalendarioCovid.Negocios.Mensageria.EnviarEmail("fulano", "marco.a.pacheko@gmail.com", "campanhateste", "venancio aires");
+
            // AdicionaEventosVacinacao();
            // AdicionaPessoas();
 
-            using var db = new AppDbContext();
-
-            //Console.WriteLine("Calendário de Vacinação:\n");
-
-            //foreach (var item in db.CalendarioVacinacao.OrderBy(x => x.DataInicial).ToList())
-            //{
-            //    Console.WriteLine(item.GetInfo());
-            //}
-
-            //Console.WriteLine("\nPessoas Cadastradas, verificação:");
-
-            //var consulta = db.Pessoas
-            //    .Where(x => x.Id > 0)
-            //    .ToList();
-
-            //foreach (var item in consulta)
-            //{
-            //    item.PodeVacinar(out string retorno);
-            //    Console.WriteLine($"{item.GetInfo()} {retorno}");
-            //}
-
-
-
-
-
-
-
-
-           
-
-
-
-
-
-
-
-            //    Console.WriteLine("\nVerificação por CPF:");
-
-            //    CalendarioCovid.Negocios.Models.Pessoa.PodeVacinar("1234", out string retorno1);
-            //    Console.WriteLine(retorno1);
-
-            //    CalendarioCovid.Negocios.Models.Pessoa.PodeVacinar("789", out string retorno2);
-            //    Console.WriteLine(retorno2);
-
-            //    Console.WriteLine("\nLista de Pessoas que podem tomar a vacina:");
-
-            //    foreach (var item in database.Pessoas.ToList().FindAll(x => x.PodeVacinar() == true))
-            //    {
-            //        item.PodeVacinar(out string retorno);
-            //        Console.WriteLine($"{item.GetInfo()} {retorno}");
-            //    }
-
-            //    Console.WriteLine("\nLista de Pessoas que ainda não podem tomar a vacina:");
-
-            //    foreach (var item in database.Pessoas.ToList().FindAll(x => x.PodeVacinar() == false))
-            //    {
-            //        item.PodeVacinar(out string retorno);
-            //        Console.WriteLine($"{item.GetInfo()} {retorno}");
-            //    }
-            //}
+            
 
             Console.ReadKey();
         }
