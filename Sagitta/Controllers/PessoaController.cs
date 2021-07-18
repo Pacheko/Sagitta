@@ -79,13 +79,6 @@ namespace Sagitta.Controllers
                    Notificado = pessoa.IsNotificado == true ? "Sim" : "Não"
                };
 
-            var teste = new retorno();
-
-            if (teste.CidadeId == 4)
-            {
-
-            }
-
             return await query.ToListAsync();
         }
 
