@@ -97,7 +97,7 @@ export class Confirmacao extends Component {
         return (
             <div>               
                 <form className="areaForm areaform2">
-                    {pessoaget.map(p => (
+                    {pessoaget.splice(0, 1).map(p => (
                         <div id="area1" >
                             <div className="areaForm">
                                 <div className="alinhaCentro">
