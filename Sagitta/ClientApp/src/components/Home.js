@@ -3,6 +3,16 @@ import React, { Component } from 'react';
 export class Home extends Component {
     static displayName = Home.name;
 
+    componentDidMount() {
+        this.popularTipos();
+    }
+
+    async popularTipos() {
+        const response = await fetch('api/enviaremail');
+        const data = await response.json();
+        
+    }
+
   render () {
       return (
           <div>

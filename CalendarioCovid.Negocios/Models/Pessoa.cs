@@ -38,7 +38,8 @@ namespace CalendarioCovid.Negocios.Models
                 x.IdadeMinima < Idade && 
                 x.DataInicial.Date <= DateTime.Now.Date &&
                 x.CidadeId == CidadeId &&
-                x.PrioridadeId == PrioridadeId                
+                x.PrioridadeId == PrioridadeId
+                
                 );
 
                 if (calendario != null)

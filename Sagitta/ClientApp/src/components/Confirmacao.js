@@ -107,6 +107,7 @@ export class Confirmacao extends Component {
                                             <div style={{ display: "none" }}>{p.email}</div>
                                             <h2 className="espaco paTop">{p.nome} VOCÊ JÁ PODE SE VACINAR</h2>
                                             <h2 className="espaco paTop">SEU DIA É HOJE</h2>
+                                            <a id="voltarInicio" style={{ width: "240px" }} className="btn btn-success botao" onClick={() => { window.location.href = "/" }}>VOLTAR PARA O INÍCIO</a>
                                         </div>
                                         : <div>  
                                             <h2 className="espaco paTop">{p.nome} VOCÊ AINDA NÃO PODE SE VACINAR</h2>
