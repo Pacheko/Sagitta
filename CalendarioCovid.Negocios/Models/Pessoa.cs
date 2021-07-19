@@ -30,23 +30,6 @@ namespace CalendarioCovid.Negocios.Models
             return $"Nome: {Nome} CPF: {CPF} Idade: {Idade}";
         }
 
-        //public bool PodeVacinar()
-        //{
-        //    using (var database = new AppDbContext())
-        //    {
-        //        var calendario = database.CalendarioVacinacao.FirstOrDefault(x => x.ExigenciaComorbidade == TemComorbidade && x.IdadeMinima < Idade && x.DataInicial <= DateTime.Now);
-
-        //        if (calendario != null)
-        //        {
-        //            return true;
-        //        }
-        //        else
-        //        {
-        //            return false;
-        //        }
-        //    }
-        //}
-
         public bool PodeVacinar()
         {
             using (var database = new AppDbContext())

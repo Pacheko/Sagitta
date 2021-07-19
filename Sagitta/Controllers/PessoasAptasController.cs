@@ -19,23 +19,36 @@ namespace Sagitta.Controllers
         {
             using var db = new AppDbContext();
 
-            var registropessoa = from pessoa in db.Pessoas
-                                 join prioridade in db.Prioridades on pessoa.PrioridadeId equals prioridade.Id
-                                 join calendario in db.CalendarioVacinacao on prioridade.Id equals calendario.PrioridadeId
-                                 join cidade in db.Cidades on calendario.CidadeId equals cidade.Id
-                                 where calendario.DataInicial <= DateTime.Now & pessoa.Idade >= calendario.IdadeMinima
+            List<Pessoa> pessoasNaoAptas = new List<Pessoa>();
 
-                                 select new
-                                 {
-                                     pessoa.Id,
-                                     pessoa.Nome,
-                                     pessoa.Idade,
-                                     pessoa.Email,
-                                     Cidade = cidade.NmCidade,
-                                     Estado = cidade.SiglaUf
-                                 };
+            foreach (var item in db.Pessoas)
+            {
+                if (item.PodeVacinar())
+                {
+                    pessoasNaoAptas.Add(item);
+                }
+            }
 
-            return await registropessoa.Distinct().ToListAsync();
+            var query =
+               from pessoa in pessoasNaoAptas
+               from cidade in db.Cidades
+               .Where(x => x.Id == pessoa.CidadeId)
+               select new retorno()
+               {
+                   Nome = pessoa.Nome,
+                   Idade = pessoa.Idade,
+                   Email = pessoa.Email,
+                   Cidade = cidade.NmCidade,
+                   Estado = cidade.SiglaUf
+               };
+            try
+            {
+                return query.ToArray();
+            }
+            catch (Exception ex)
+            {
+                return NotFound();
+            }
         }
         
         
