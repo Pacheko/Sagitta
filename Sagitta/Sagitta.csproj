@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\components\ComboCidade.js" />
+    <None Remove="ClientApp\src\components\Finalizar.js" />
     <None Remove="ClientApp\src\funcoes\mascaras.js" />
   </ItemGroup>
 

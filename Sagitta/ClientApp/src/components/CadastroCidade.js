@@ -32,6 +32,12 @@ export class CadastroCidade extends Component {
 
     }
 
+    validar() {
+        if (sessionStorage.getItem("login") !== "true") {
+            window.location.href = "/loginMedicenter";
+        }
+    }
+
     async intialize() {
 
         const getID = new GetURL;
@@ -72,7 +78,7 @@ export class CadastroCidade extends Component {
             : this.renderCreateForm();
 
         return (
-            <div>
+            <div onLoad={this.validar()}>
                 <h1 style={{ color: "#fff" }}>{this.state.title}</h1>
                 {contents}
             </div>

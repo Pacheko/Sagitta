@@ -37,6 +37,12 @@ export class NovaCampanhaVacinacao extends Component {
 
     }
 
+    validar() {
+        if (sessionStorage.getItem("login") !== "true") {
+            window.location.href = "/loginMedicenter";
+        }
+    }
+
     async intialize() {
 
         const getID = new GetURL;
@@ -77,7 +83,7 @@ export class NovaCampanhaVacinacao extends Component {
             : this.renderCreateForm();
 
         return (
-            <div>
+            <div onLoad={this.validar()}>
                 {contents}
             </div>
         );
