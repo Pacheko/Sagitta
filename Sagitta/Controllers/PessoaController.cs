@@ -1,9 +1,7 @@
 ﻿using CalendarioCovid.Negocios.Database;
 using CalendarioCovid.Negocios.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,12 +10,6 @@ using System.Threading.Tasks;
 
 namespace Sagitta.Controllers
 {
-
-    public class retorno1
-    {
-        public int IdadeMinima { get; set; }      
-    }
-
     public class retorno2
     {
         public bool Comorbidade { get; set; }
@@ -92,19 +84,13 @@ namespace Sagitta.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable>> CarregarPessoaAsync(int id)
         {
-
             using var db = new AppDbContext();
-
             var pessoa2 = await db.Pessoas.FindAsync(id);
-
             if (pessoa2 == null)
             {
                 return NotFound();
             }
 
-            
-            
-            
             var registropessoa = from pessoa in db.Pessoas
                                  join prioridade in db.Prioridades on pessoa.PrioridadeId equals prioridade.Id
                                  join calendario in db.CalendarioVacinacao on prioridade.Id equals calendario.PrioridadeId
@@ -121,7 +107,7 @@ namespace Sagitta.Controllers
                                      DataHojeCompleta = DateTime.Now
                                  };
 
-            
+
             //PEGA A MENOR IDADE MÍNIMA SEM COMORBIDADE
             var pessoaRegistro2 = from calendario in db.CalendarioVacinacao
                                   join prioridade in db.Prioridades on calendario.PrioridadeId equals prioridade.Id
@@ -129,10 +115,10 @@ namespace Sagitta.Controllers
                                   orderby calendario.IdadeMinima ascending
 
                                   select new
-                                 {
-                                     IdadeMinima = calendario.IdadeMinima, 
-                                     DataInicial = calendario.DataInicial
-                                 };
+                                  {
+                                      IdadeMinima = calendario.IdadeMinima,
+                                      DataInicial = calendario.DataInicial
+                                  };
 
             //PEGA A MENOR IDADE MÍNIMA COM A DATA INICIAL <= A DATA ATUAL E A IDADE DA PESSOA
             var pessoaRegistro4 = from calendario in db.CalendarioVacinacao
@@ -169,63 +155,63 @@ namespace Sagitta.Controllers
                                   where pessoa.Id == id
 
                                   select new retorno2()
-                                  {                                    
+                                  {
                                       Comorbidade = prioridade.IsComorbidade
                                   };
 
 
-            
 
-            
+
+
             if (pessoaRegistro4.Any() == true && pessoaRegistro4.First().Idade >= pessoaRegistro4.First().IdadeMinima)
             {
                 registropessoa = from calendario in db.CalendarioVacinacao
-                                    join prioridade in db.Prioridades on calendario.PrioridadeId equals prioridade.Id
-                                    join pessoa in db.Pessoas on prioridade.Id equals pessoa.PrioridadeId
-                                    where pessoa.Id == id & calendario.DataInicial <= DateTime.Now
-                                    orderby calendario.IdadeMinima ascending
+                                 join prioridade in db.Prioridades on calendario.PrioridadeId equals prioridade.Id
+                                 join pessoa in db.Pessoas on prioridade.Id equals pessoa.PrioridadeId
+                                 where pessoa.Id == id & calendario.DataInicial <= DateTime.Now
+                                 orderby calendario.IdadeMinima ascending
 
-                                    select new
-                                    {
-                                        pessoa.Id,
-                                        pessoa.Nome,
-                                        pessoa.Idade,
-                                        pessoa.Email,
-                                        calendario.IdadeMinima,
-                                        DataInicial = calendario.DataInicial.ToString("dd/MM/yyyy"),
-                                        DataHoje = DateTime.Now.ToString("dd/MM/yyyy"),
-                                        DataInicialCompleta = calendario.DataInicial,
-                                        DataHojeCompleta = DateTime.Now
-                                    };
+                                 select new
+                                 {
+                                     pessoa.Id,
+                                     pessoa.Nome,
+                                     pessoa.Idade,
+                                     pessoa.Email,
+                                     calendario.IdadeMinima,
+                                     DataInicial = calendario.DataInicial.ToString("dd/MM/yyyy"),
+                                     DataHoje = DateTime.Now.ToString("dd/MM/yyyy"),
+                                     DataInicialCompleta = calendario.DataInicial,
+                                     DataHojeCompleta = DateTime.Now
+                                 };
 
                 return await registropessoa.ToListAsync();
             }
-                     
-           
+
+
             if (pessoaRegistro5.Any() == true && pessoaRegistro2.Any() == true && pessoaRegistro5.First().DataInicial <= pessoaRegistro2.First().DataInicial && pessoaRegistro5.First().Idade >= pessoaRegistro5.First().IdadeMinima)
             {
                 registropessoa = from calendario in db.CalendarioVacinacao
-                                    join prioridade in db.Prioridades on calendario.PrioridadeId equals prioridade.Id
-                                    join pessoa in db.Pessoas on prioridade.Id equals pessoa.PrioridadeId
-                                    where pessoa.Id == id & calendario.DataInicial > DateTime.Now
-                                    orderby calendario.IdadeMinima ascending
+                                 join prioridade in db.Prioridades on calendario.PrioridadeId equals prioridade.Id
+                                 join pessoa in db.Pessoas on prioridade.Id equals pessoa.PrioridadeId
+                                 where pessoa.Id == id & calendario.DataInicial > DateTime.Now
+                                 orderby calendario.IdadeMinima ascending
 
-                                    select new
-                                    {
-                                        pessoa.Id,
-                                        pessoa.Nome,
-                                        pessoa.Idade,
-                                        pessoa.Email,
-                                        calendario.IdadeMinima,
-                                        DataInicial = calendario.DataInicial.ToString("dd/MM/yyyy"),
-                                        DataHoje = DateTime.Now.ToString("dd/MM/yyyy"),
-                                        DataInicialCompleta = calendario.DataInicial,
-                                        DataHojeCompleta = DateTime.Now
-                                    };
+                                 select new
+                                 {
+                                     pessoa.Id,
+                                     pessoa.Nome,
+                                     pessoa.Idade,
+                                     pessoa.Email,
+                                     calendario.IdadeMinima,
+                                     DataInicial = calendario.DataInicial.ToString("dd/MM/yyyy"),
+                                     DataHoje = DateTime.Now.ToString("dd/MM/yyyy"),
+                                     DataInicialCompleta = calendario.DataInicial,
+                                     DataHojeCompleta = DateTime.Now
+                                 };
 
                 return await registropessoa.ToListAsync();
             }
-            
+
             else if (pessoaRegistro2.Any() == true && pessoaRegistro3.Any() == true && pessoaRegistro4.Any() == true && pessoaRegistro3.First().Comorbidade == true && pessoaRegistro4.First().IdadeMinima > pessoaRegistro2.First().IdadeMinima)
             {
                 registropessoa = from pessoa in db.Pessoas
@@ -318,32 +304,33 @@ namespace Sagitta.Controllers
                                  };
 
                 return await registropessoa.ToListAsync();
-            } else
+            }
+            else
             {
                 registropessoa = from pessoa in db.Pessoas
                                         .Where(x => x.Id == id)
-                                    from calendario in db.CalendarioVacinacao
-                                    join prioridade in db.Prioridades on calendario.PrioridadeId equals prioridade.Id
-                                    where prioridade.IsComorbidade == false & calendario.IdadeMinima == (db.CalendarioVacinacao.Where(r => 1 == 1).Min(c => c.IdadeMinima))
+                                 from calendario in db.CalendarioVacinacao
+                                 join prioridade in db.Prioridades on calendario.PrioridadeId equals prioridade.Id
+                                 where prioridade.IsComorbidade == false & calendario.IdadeMinima == (db.CalendarioVacinacao.Where(r => 1 == 1).Min(c => c.IdadeMinima))
 
-                                    select new
-                                    {
-                                        pessoa.Id,
-                                        pessoa.Nome,
-                                        pessoa.Idade,
-                                        pessoa.Email,
-                                        IdadeMinima = 200,
-                                        DataInicial = DateTime.Now.AddDays(5).ToString("dd/MM/yyyy"),
-                                        DataHoje = DateTime.Now.ToString("dd/MM/yyyy"),
-                                        DataInicialCompleta = DateTime.Now.AddDays(5),
-                                        DataHojeCompleta = DateTime.Now
-                                    };
+                                 select new
+                                 {
+                                     pessoa.Id,
+                                     pessoa.Nome,
+                                     pessoa.Idade,
+                                     pessoa.Email,
+                                     IdadeMinima = 200,
+                                     DataInicial = DateTime.Now.AddDays(5).ToString("dd/MM/yyyy"),
+                                     DataHoje = DateTime.Now.ToString("dd/MM/yyyy"),
+                                     DataInicialCompleta = DateTime.Now.AddDays(5),
+                                     DataHojeCompleta = DateTime.Now
+                                 };
 
                 return await registropessoa.ToListAsync();
             }
 
-            
-            return await registropessoa.ToListAsync(); 
+
+            return await registropessoa.ToListAsync();
         }
 
         [HttpPut("{id}")]
@@ -359,7 +346,7 @@ namespace Sagitta.Controllers
 
             return NoContent();
         }
-      
+
         [HttpPost]
         public async Task<ActionResult<IEnumerable>> PostNovoCadastro([FromForm] Pessoa pessoa)
         {
@@ -375,14 +362,14 @@ namespace Sagitta.Controllers
             db.Pessoas.Add(pessoa);
             db.SaveChanges();
 
-            var pessoaRegistro = from pessoas in db.Pessoas                                
+            var pessoaRegistro = from pessoas in db.Pessoas
                                  where pessoas.Id == pessoa.Id
 
                                  select new
                                  {
                                      pessoas.Id,
                                      pessoas.Nome,
-                                     pessoas.Idade                                  
+                                     pessoas.Idade
                                  };
 
             return await pessoaRegistro.ToListAsync();

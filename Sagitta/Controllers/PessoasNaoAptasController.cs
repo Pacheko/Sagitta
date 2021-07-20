@@ -1,6 +1,5 @@
 ﻿using CalendarioCovid.Negocios.Database;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections;
 using System.Collections.Generic;

@@ -1,7 +1,6 @@
 ﻿using CalendarioCovid.Negocios.Database;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,26 +16,7 @@ namespace Sagitta.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable>> GetTodasVacinas()
         {
-            
             using var db = new AppDbContext();
-
-            //TipoVacina t = new TipoVacina()
-            //{
-            //    NmVacina = "aztrazeneca",
-            //    QtDoses = 2
-            //};
-
-            //TipoVacina t2 = new TipoVacina()
-            //{
-            //    NmVacina = "Coronavac",
-            //    QtDoses = 1
-            //};
-
-            //db.TipoVacinas.Add(t);
-            //db.TipoVacinas.Add(t2);
-
-           // db.SaveChanges();
-           
             return await db.TipoVacinas.ToArrayAsync();
         }
 
@@ -44,21 +24,16 @@ namespace Sagitta.Controllers
         public async Task<ActionResult<TipoVacina>> PostNovoCadastro([FromForm] TipoVacina vacina)
         {
             using var db = new AppDbContext();
-
             db.TipoVacinas.Add(vacina);
-           
             await db.SaveChangesAsync();
 
-            
             return CreatedAtAction("GetTodasVacinas", new { id = vacina.Id }, vacina);
         }
 
         [HttpGet("{id}")]
         public async Task<IEnumerable<TipoVacina>> CarregarVacinaAsync(int id)
         {
-            
             using var db = new AppDbContext();
-
             var vacina = await db.TipoVacinas.FindAsync(id);
 
             if (vacina == null)
@@ -66,8 +41,7 @@ namespace Sagitta.Controllers
                 return (IEnumerable<TipoVacina>)NotFound();
             }
 
-            return db.TipoVacinas.Where(x => x.Id == id).ToList();        
-                    
+            return db.TipoVacinas.Where(x => x.Id == id).ToList();
         }
 
         [HttpPut("{id}")]
@@ -79,7 +53,6 @@ namespace Sagitta.Controllers
             }
 
             using var db = new AppDbContext();
-
             db.Entry(vacina).State = EntityState.Modified;
 
             try
@@ -105,8 +78,8 @@ namespace Sagitta.Controllers
         public async Task<IActionResult> DeleteVacina(int id)
         {
             using var db = new AppDbContext();
-
             var vacina = await db.TipoVacinas.FindAsync(id);
+
             if (vacina == null)
             {
                 return NotFound();

@@ -1,7 +1,6 @@
 ﻿using CalendarioCovid.Negocios.Database;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,19 +17,14 @@ namespace Sagitta.Controllers
         public async Task<ActionResult<IEnumerable>> GetTodasCidades()
         {
             using var db = new AppDbContext();
-
-        
             return await db.Cidades.ToArrayAsync();
         }
-
 
         [HttpPost]
         public async Task<ActionResult<Cidade>> PostNovaCidade([FromForm] Cidade cidade)
         {
             using var db = new AppDbContext();
-
             db.Cidades.Add(cidade);
-
             await db.SaveChangesAsync();
 
             return CreatedAtAction("GetTodasCidades", new { id = cidade.Id }, cidade);
@@ -39,18 +33,14 @@ namespace Sagitta.Controllers
         [HttpGet("{id}")]
         public async Task<IEnumerable<Cidade>> CarregarCidadeAsync(int id)
         {
-
             using var db = new AppDbContext();
-
             var cidade = await db.Cidades.FindAsync(id);
 
             if (cidade == null)
             {
                 return (IEnumerable<Cidade>)NotFound();
             }
-
             return db.Cidades.Where(x => x.Id == id).ToList();
-
         }
 
         [HttpPut("{id}")]
@@ -60,9 +50,7 @@ namespace Sagitta.Controllers
             {
                 return BadRequest();
             }
-
             using var db = new AppDbContext();
-
             db.Entry(cidade).State = EntityState.Modified;
 
             try
@@ -80,7 +68,6 @@ namespace Sagitta.Controllers
                     throw;
                 }
             }
-
             return NoContent();
         }
 
@@ -88,7 +75,6 @@ namespace Sagitta.Controllers
         public async Task<IActionResult> DeleteCidade(int id)
         {
             using var db = new AppDbContext();
-
             var cidade = await db.Cidades.FindAsync(id);
             if (cidade == null)
             {
@@ -97,14 +83,12 @@ namespace Sagitta.Controllers
 
             db.Cidades.Remove(cidade);
             await db.SaveChangesAsync();
-
             return NoContent();
         }
 
         private bool CidadeExists(int id)
         {
             using var db = new AppDbContext();
-
             return db.Cidades.Any(e => e.Id == id);
         }
     }
