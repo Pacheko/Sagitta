@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CalendarioCovid.Negocios.Models
+﻿namespace CalendarioCovid.Negocios.Models
 {
     public class Prioridade
     {

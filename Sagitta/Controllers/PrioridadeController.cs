@@ -2,7 +2,6 @@
 using CalendarioCovid.Negocios.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,24 +17,6 @@ namespace Sagitta.Controllers
         public async Task<ActionResult<IEnumerable>> GetPrioridade()
         {
             using var db = new AppDbContext();
-
-            //foreach (var item in db.Prioridades)
-            //{
-            //    db.Prioridades.Remove(item);
-            //}
-            //db.SaveChanges();
-
-            //db.Prioridades.Add(new CalendarioCovid.Negocios.Models.Prioridade() { NmGrupo = "Sem Prioridade", IsComorbidade = false });
-            //db.Prioridades.Add(new CalendarioCovid.Negocios.Models.Prioridade() { NmGrupo = "Professores", IsComorbidade = false });
-            //db.Prioridades.Add(new CalendarioCovid.Negocios.Models.Prioridade() { NmGrupo = "Profissionais da Saude", IsComorbidade = false });
-            //db.Prioridades.Add(new CalendarioCovid.Negocios.Models.Prioridade() { NmGrupo = "Pressão Alta", IsComorbidade = true });
-            //db.Prioridades.Add(new CalendarioCovid.Negocios.Models.Prioridade() { NmGrupo = "Asma", IsComorbidade = true });
-
-
-
-            //db.SaveChanges();
-
-
             return await db.Prioridades.ToListAsync();
         }
 
@@ -43,20 +24,16 @@ namespace Sagitta.Controllers
         public async Task<ActionResult<Prioridade>> PostNovaPrioridade([FromForm] Prioridade prioridade)
         {
             using var db = new AppDbContext();
-
             db.Prioridades.Add(prioridade);
 
             await db.SaveChangesAsync();
-
             return CreatedAtAction("GetPrioridade", new { id = prioridade.Id }, prioridade);
         }
 
         [HttpGet("{id}")]
         public async Task<IEnumerable<Prioridade>> CarregarPrioridadeAsync(int id)
         {
-
             using var db = new AppDbContext();
-
             var prioridade = await db.Prioridades.FindAsync(id);
 
             if (prioridade == null)
@@ -65,7 +42,6 @@ namespace Sagitta.Controllers
             }
 
             return db.Prioridades.Where(x => x.Id == id).ToList();
-
         }
 
         [HttpPut("{id}")]

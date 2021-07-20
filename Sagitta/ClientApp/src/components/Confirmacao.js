@@ -128,12 +128,9 @@ export class Confirmacao extends Component {
                                             
                                           </div>
                                     )}
-                                    
-                                    
                                 </div>
                             </div>
                         </div>
-
                     ))}    
                 </form>
             </div>

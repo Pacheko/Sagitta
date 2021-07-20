@@ -1,9 +1,7 @@
 ﻿using CalendarioCovid.Negocios.Database;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CalendarioCovid.Negocios.Models;
@@ -15,10 +13,9 @@ namespace Sagitta.Controllers
         public int Id { get; set; }
         public string DataInicial { get; set; }
         public int IdadeMinima { get; set; }
-        public string PrioridadeId { get; set; }     
-        public string CidadeId { get; set; }    
+        public string PrioridadeId { get; set; }
+        public string CidadeId { get; set; }
         public string TipoVacinaId { get; set; }
-       
     }
 
     [ApiController]
@@ -28,7 +25,6 @@ namespace Sagitta.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable>> GetCampanha()
         {
-
             using var db = new AppDbContext();
 
             var query =
@@ -47,10 +43,9 @@ namespace Sagitta.Controllers
                    PrioridadeId = prioridade.NmGrupo,
                    CidadeId = cidade.NmCidade,
                    TipoVacinaId = TipoVacina.NmVacina
-                   
                };
 
-            return await query.ToListAsync();       
+            return await query.ToListAsync();
         }
 
         [HttpPost]
