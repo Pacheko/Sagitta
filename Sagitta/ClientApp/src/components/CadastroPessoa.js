@@ -75,22 +75,21 @@ export class Cadastro extends Component {
                         <div className="form-group">
                             <div className="form-group col-md-6">
                                 <label for="nome">NOME</label>
-                                <input type="text" name="nome" onChange={this.onChange.bind(this)} className="form-control" id="nome" placeholder="Nome" autoComplete="off" />
+                                <input type="text" name="nome" onChange={this.onChange.bind(this)} className="form-control" id="nome" placeholder="Nome" autoComplete="off" required />
                             </div>
                             <div className="form-group col-md-6">
                                 <label for="cpf">CPF</label>
-                                <input type="text" maxLength="11" name="cpf" onChange={this.onChange.bind(this)} className="form-control" id="cpf" placeholder="Cpf" autoComplete="off" />
+                                <input type="text" maxLength="11" name="cpf" onChange={this.onChange.bind(this)} className="form-control" id="cpf" placeholder="Cpf" autoComplete="off" required />
                             </div>
                         </div>
                         <div className="form-group">
                             <div className="form-group col-md-6">
                                 <label for="idade">IDADE</label>
-                                <input type="text" className="form-control" name="idade" onChange={this.onChange.bind(this)} maxLength="3" id="idade" placeholder="Idade" autoComplete="off" />
+                                <input type="text" className="form-control" name="idade" onChange={this.onChange.bind(this)} maxLength="3" id="idade" placeholder="Idade" autoComplete="off" required />
                             </div>
                             <div className="form-group col-md-6">
                                 <label for="sexo">SEXO</label>
-                                <select className="form-control" id="sexo" name="sexo" onChange={this.onChange.bind(this)}>
-                                    <option selected>Escolha</option>
+                                <select className="form-control" id="sexo" name="sexo" onChange={this.onChange.bind(this)} required>                                 
                                     <option value="Masculino">Masculino</option>
                                     <option value="Feminino">Feminino</option>
                                 </select>
@@ -99,29 +98,29 @@ export class Cadastro extends Component {
                         <div className="form-group">
                             <div className="form-group col-md-6">
                                 <label for="telefone">Telefone</label>
-                                <input type="text" className="form-control" name="fone" onChange={this.onChange.bind(this)} id="fone" maxLength="11" placeholder="Telefone" autoComplete="off" />
+                                <input type="text" className="form-control" name="fone" onChange={this.onChange.bind(this)} id="fone" maxLength="11" placeholder="Telefone" autoComplete="off" required />
                             </div>
                             <div className="form-group col-md-6">
                                 <label for="email">EMAIL</label>
-                                <input type="email" className="form-control" name="email" onChange={this.onChange.bind(this)} id="email" placeholder="nome@exemplo.com" autoComplete="off" />
+                                <input type="email" className="form-control" name="email" onChange={this.onChange.bind(this)} id="email" placeholder="nome@exemplo.com" autoComplete="off" required />
                             </div>
                         </div>
                         <div className="form-group">
                             <div className="form-group col-md-6">
                                 <label for="dataNascimento">DATA DE NASCIMENTO</label>
-                                <input type="date" className="form-control" name="dataNascimento" onChange={this.onChange.bind(this)} id="dataNascimento" />
+                                <input type="date" className="form-control" name="dataNascimento" onChange={this.onChange.bind(this)} id="dataNascimento" required />
                             </div>
 
                             <div className="form-group col-md-6">
                                 <label for="cidadeId">Cidade</label>
-                                <ComboCidade id="cidadeId" onChange={this.onChange.bind(this)}></ComboCidade>
+                                <ComboCidade id="cidadeId" onChange={this.onChange.bind(this)} required></ComboCidade>
                             </div>
                         </div>
 
                         <div className="form-group">
                             <div className="form-group col-md-6">
                                 <label for="cidadeId">Grupo Especial?</label>
-                                <ComboPrioridade id="prioridadeId" onChange={this.onChange.bind(this)}></ComboPrioridade>
+                                <ComboPrioridade id="prioridadeId" onChange={this.onChange.bind(this)} required></ComboPrioridade>
                             </div>
    
                             <div className="form-group col-md-12 botaoAlinhar" align="center">

@@ -109,11 +109,11 @@ export class NovaCampanhaVacinacao extends Component {
                             <div className="form-group">
                                 <div className="form-group col-md-6">
                                     <label for="dataInicial">DATA INICIAL</label>
-                                    <input type="date" className="form-control" name="dataInicial" value={p.dataInicial} defaultValue={p.dataInicial} id="dataInicial" />
+                                    <input type="date" className="form-control" name="dataInicial" value={p.dataInicial} defaultValue={p.dataInicial} id="dataInicial" required />
                                 </div>
                                 <div className="form-group col-md-6">
                                     <label for="idadeMinima">IDADE MINIMA</label>
-                                    <input type="number" className="form-control" max="130" name="idadeMinima" defaultValue={p.idadeMinima} id="idadeMinima" placeholder="Idade minima" autoComplete="off" />
+                                    <input type="number" className="form-control" max="130" name="idadeMinima" defaultValue={p.idadeMinima} id="idadeMinima" placeholder="Idade minima" autoComplete="off" required />
                                 </div>
                             </div>
 

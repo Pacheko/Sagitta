@@ -18,8 +18,7 @@ export default class ComboCidade extends Component {
     render() {
         return (
             
-                <select className="form-control" id={this.state.componenteId} name={this.state.componenteId}>
-                    <option selected>Escolha</option>
+                <select className="form-control" id={this.state.componenteId} name={this.state.componenteId}>                   
                     {this.renderOption()}
                 </select>
             
