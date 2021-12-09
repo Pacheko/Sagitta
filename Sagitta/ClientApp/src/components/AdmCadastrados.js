@@ -59,7 +59,7 @@ export class AdmCadastrados extends Component {
                     <thead>
                         <tr>
                             <th>Login</th>
-                            <th>Senha</th>
+                            {/*<th>Senha</th>*/}
                             <th>Ações</th>
                         </tr>
                     </thead>
@@ -67,7 +67,7 @@ export class AdmCadastrados extends Component {
                         {adm.map(p =>
                             <tr key={p.id}>
                                 <td>{p.login}</td>
-                                <td>{p.senha}</td>
+                                {/*<td>{p.senha}</td>*/}
                                 <td>
                                     <button className="btn btn-success" onClick={(id) => this.handleEditar(p.id)}>Editar</button> &nbsp;
                                     <button className="btn btn-danger" onClick={(id, nome) => this.handleDelete(p.id, p.login)}>Deletar</button>

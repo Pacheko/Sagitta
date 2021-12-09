@@ -25,6 +25,7 @@ export class NovoUsuario extends Component {
     constructor(props) {
         super(props);
         this.state = { title: "", admNovo: new NovoAdm(), loading: true };
+
         this.intialize();
 
         this.handleSalve = this.handleSalve.bind(this);

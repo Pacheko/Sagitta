@@ -28,6 +28,8 @@ namespace Sagitta.Controllers
         {
             using var db = new AppDbContext();
 
+            adm.Senha = Cripto.sha256encrypt(adm.Senha);
+
             db.Administradores.Add(adm);
 
             await db.SaveChangesAsync();
@@ -105,7 +107,13 @@ namespace Sagitta.Controllers
         public async Task<ActionResult<IEnumerable>> CarregarLoginAsync([FromForm] Administrador adm)
         {
             using var db = new AppDbContext();
-            return await db.Administradores.Where(x => x.Login == adm.Login & x.Senha == adm.Senha).ToArrayAsync();
+
+            //db.Administradores.Add(new Administrador() { Login = "admin", Senha = "admin" });
+            //db.SaveChanges();
+
+            string senhaEnc = Cripto.sha256encrypt(adm.Senha);
+
+            return await db.Administradores.Where(x => x.Login == adm.Login & x.Senha == senhaEnc).ToArrayAsync();
         }
 
         private bool AdmExists(int id)
